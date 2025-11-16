@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon Transcribe – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Prebuilt AI APIs</h2>
+          <ul>
+            <li><a href="amazon-comprehend.html">Amazon Comprehend</a></li>
+            <li><a href="amazon-rekognition.html">Amazon Rekognition</a></li>
+            <li><a href="amazon-transcribe.html">Amazon Transcribe</a></li>
+            <li><a href="amazon-polly.html">Amazon Polly</a></li>
+            <li><a href="amazon-translate.html">Amazon Translate</a></li>
+            <li><a href="amazon-textract.html">Amazon Textract</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#prebuilt-apis">Prebuilt AI APIs</a> <span aria-hidden="true">›</span>
+          Amazon Transcribe
+        </p>
+        <h1>Amazon Transcribe</h1>
+        <p>
+          Amazon Transcribe is an automatic speech recognition (ASR) service that converts speech to text. It supports
+          batch and streaming transcription, custom vocabularies, and domain-specific features such as call analytics.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Batch transcription of audio files stored in S3.</li>
+            <li>Real-time streaming transcription over WebSocket or gRPC.</li>
+            <li>Custom vocabularies and language models to improve accuracy.</li>
+            <li>Speaker identification and channel identification for multi-party audio.</li>
+            <li>Call analytics for contact center use cases (Transcribe Call Analytics).</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Transcribing audio or video content to text for downstream NLP with Comprehend.</li>
+            <li>Creating datasets for voice-of-customer analysis, topic modeling, or sentiment tracking.</li>
+            <li>Enabling voice-based interfaces and search over recorded calls and meetings.</li>
+            <li>Feeding transcripts into labeling pipelines or training data for custom models.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>How it works (high level)</h2>
+          <div class="diagram" role="img" aria-label="Audio in S3 or streams are processed by Transcribe, which outputs transcripts to S3 or the client.">
+            <svg viewBox="0 0 540 130" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="20" width="120" height="40" fill="#dbeafe" stroke="#1d4ed8" />
+              <text x="70" y="45" text-anchor="middle" font-size="11">Audio files / streams</text>
+
+              <rect x="160" y="30" width="160" height="70" fill="#fee2e2" stroke="#b91c1c" />
+              <text x="240" y="60" text-anchor="middle" font-size="11">Amazon Transcribe</text>
+
+              <rect x="350" y="20" width="170" height="35" fill="#ecfdf5" stroke="#047857" />
+              <text x="435" y="42" text-anchor="middle" font-size="11">Transcripts (S3 / API)</text>
+
+              <rect x="350" y="75" width="170" height="35" fill="#fef9c3" stroke="#a16207" />
+              <text x="435" y="97" text-anchor="middle" font-size="11">NLP (Comprehend) / analytics</text>
+
+              <line x1="130" y1="40" x2="160" y2="55" stroke="#4b5563" marker-end="url(#arrow17)" />
+              <line x1="320" y1="50" x2="350" y2="37" stroke="#4b5563" marker-end="url(#arrow17)" />
+              <line x1="320" y1="80" x2="350" y2="92" stroke="#4b5563" marker-end="url(#arrow17)" />
+
+              <defs>
+                <marker id="arrow17" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 z" fill="#4b5563" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <h3>Start a transcription job (CLI)</h3>
+          <pre><code class="language-bash">aws transcribe start-transcription-job \
+  --transcription-job-name call-123 \
+  --language-code en-US \
+  --media MediaFileUri=s3://ml-audio/call-123.wav \
+  --output-bucket-name ml-transcripts</code></pre>
+
+          <h3>Start streaming transcription (conceptual, Python)</h3>
+          <pre><code class="language-python"># In practice, use the AWS SDK streaming APIs or WebSocket client.
+# Here we show only the high-level idea.
+import boto3
+
+transcribe = boto3.client("transcribe")
+# See official docs for full streaming examples.</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Choose the right language and domain settings to optimize accuracy.</li>
+            <li>Use S3 lifecycle policies to manage storage costs for large volumes of audio and transcripts.</li>
+            <li>Chain Transcribe with Comprehend for richer insights (sentiment, entities) on spoken content.</li>
+            <li>Use streaming transcription for real-time applications, batch for offline analytics.</li>
+            <li>Encrypt audio files and transcripts, and restrict access with IAM and S3 policies.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>Transcribe is always the “speech to text” service; do not confuse it with Polly (text to speech).</li>
+            <li>Look for keywords like “call center,” “meeting recordings,” or “real-time captions.”</li>
+            <li>Transcribe plus Comprehend is a common pairing in exam architectures for voice-of-customer analytics.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/transcribe/latest/dg/what-is-transcribe.html">Amazon Transcribe Developer Guide – What Is</a></li>
+            <li><a href="https://aws.amazon.com/transcribe/">Amazon Transcribe product page</a></li>
+            <li><a href="https://aws.amazon.com/blogs/machine-learning/category/artificial-intelligence/amazon-transcribe/">AWS ML Blog – Transcribe</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/transcribe/latest/dg/what-is-transcribe.html">Amazon Transcribe Developer Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Amazon Transcribe turns speech into text, often as the first step before applying NLP and analytics.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

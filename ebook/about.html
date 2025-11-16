@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AWS ML Specialty Ebook – About &amp; License</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="index.html" data-page="index.html">Home</a>
+          <a href="toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="search.html" data-page="search.html">Search</a>
+          <a href="about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="About navigation">
+        <section class="sidebar-section">
+          <h2>Sections</h2>
+          <ul>
+            <li><a href="#purpose">Purpose</a></li>
+            <li><a href="#sources">Sources &amp; citation</a></li>
+            <li><a href="#license">License</a></li>
+            <li><a href="#updating">Updating the ebook</a></li>
+            <li><a href="#known-gaps">Known gaps</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs"><a href="index.html">Home</a> <span aria-hidden="true">›</span> About</p>
+        <h1>About this ebook</h1>
+
+        <section id="purpose">
+          <h2>Purpose</h2>
+          <p>
+            This ebook is a concise, offline-friendly study companion for the AWS Certified Machine Learning –
+            Specialty exam. It focuses on the AWS services and architectural patterns that most frequently appear in
+            exam questions and real-world ML solutions.
+          </p>
+        </section>
+
+        <section id="sources">
+          <h2>Sources &amp; citation</h2>
+          <p>
+            Content is paraphrased and summarized from official AWS documentation, AWS blogs, and AWS conference
+            sessions. Each service page includes:
+          </p>
+          <ul>
+            <li>One or more links to the official AWS “What is X?” or service overview documentation pages.</li>
+            <li>Optionally, links to AWS blogs, workshops, or re:Invent talks for deeper dives.</li>
+            <li>A citation line with the primary source URL and an approximate “last updated” date.</li>
+          </ul>
+          <p>
+            Only short quotations (if any) are used, limited to at most 25 words and marked in blockquotes with an
+            explicit source URL.
+          </p>
+          <p>Canonical documentation entry points include, for example:</p>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html">Amazon SageMaker documentation</a></li>
+            <li><a href="https://docs.aws.amazon.com/streams/latest/dev/introduction.html">Amazon Kinesis Data Streams documentation</a></li>
+            <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html">Amazon S3 User Guide</a></li>
+            <li><a href="https://aws.amazon.com/machine-learning/">AWS Machine Learning landing page</a></li>
+          </ul>
+          <p class="callout">
+            Due to the offline build environment, the content here is based on the latest AWS documentation known to
+            the model at training time, not a live crawl. Always verify details against the current AWS documentation.
+          </p>
+        </section>
+
+        <section id="license">
+          <h2>License</h2>
+          <p>
+            The compiled ebook (HTML, CSS, and JavaScript in this package) is provided under the Creative Commons
+            Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) license, as described in <a href="LICENSE.txt">LICENSE.txt</a>.
+          </p>
+          <p>
+            This license applies to the original explanatory text, diagrams, and practice questions in the ebook. It
+            does <strong>not</strong> change the licenses of AWS documentation, AWS SDKs, or any third-party libraries
+            referenced or used.
+          </p>
+        </section>
+
+        <section id="updating">
+          <h2>Updating the ebook</h2>
+          <ol>
+            <li>Open the relevant service page in the <code>ebook/services/</code> folder.</li>
+            <li>
+              Compare the content to the latest AWS documentation (for example, the service’s “What is X?” page and
+              recent “What’s New” announcements).
+            </li>
+            <li>Adjust summaries, best practices, and exam tips to reflect newly released features or deprecations.</li>
+            <li>Update the citation line with the latest docs URLs and the date you last reviewed them.</li>
+            <li>Run <code>./build.sh</code> to regenerate the ZIP archive and manifest.</li>
+          </ol>
+        </section>
+
+        <section id="known-gaps">
+          <h2>Known gaps and limitations</h2>
+          <ul>
+            <li>
+              Live HTML fetching from AWS documentation was not possible in the current execution environment. The
+              summaries therefore reflect AWS documentation as of the model’s training cutoff rather than the exact
+              state on build day.
+            </li>
+            <li>
+              Only high-level architecture diagrams are included. For complex production designs, refer to AWS
+              reference architectures and Well-Architected Labs.
+            </li>
+            <li>
+              Code examples are intentionally minimal and omit full error handling, configuration management, and
+              infrastructure-as-code templates.
+            </li>
+          </ul>
+          <p>
+            If you notice inaccuracies or want deeper coverage (for example, feature store patterns or advanced
+            observability for ML), extend the relevant pages and re-run the build.
+          </p>
+        </section>
+
+        <p class="source-line">
+          Content compiled and summarized from: <a href="https://docs.aws.amazon.com/">https://docs.aws.amazon.com/</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Content compiled and summarized from AWS documentation (links included). Some code examples adapted. See README for details.
+    </footer>
+    <script src="scripts/prism.js"></script>
+    <script src="scripts/main.js"></script>
+  </body>
+</html>
+

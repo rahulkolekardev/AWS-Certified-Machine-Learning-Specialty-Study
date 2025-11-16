@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon ECS – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Compute &amp; Containers</h2>
+          <ul>
+            <li><a href="amazon-ec2.html">Amazon EC2</a></li>
+            <li><a href="aws-batch.html">AWS Batch</a></li>
+            <li><a href="amazon-ecr.html">Amazon ECR</a></li>
+            <li><a href="amazon-ecs.html">Amazon ECS</a></li>
+            <li><a href="amazon-eks.html">Amazon EKS</a></li>
+            <li><a href="aws-fargate.html">AWS Fargate</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#compute">Compute &amp; Orchestration</a> <span aria-hidden="true">›</span>
+          Amazon ECS
+        </p>
+        <h1>Amazon Elastic Container Service (ECS)</h1>
+        <p>
+          Amazon ECS is a fully managed container orchestration service that runs Docker containers on EC2 instances or
+          AWS Fargate. For ML, it can host microservices, feature pipelines, and inference services as containerized
+          applications.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Task and service abstractions for running containers.</li>
+            <li>Support for EC2 launch type or serverless Fargate launch type.</li>
+            <li>Integration with ALB/NLB, CloudWatch, IAM, and ECR.</li>
+            <li>Service Auto Scaling based on metrics.</li>
+            <li>Supports GPU instances for containerized ML workloads.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Hosting ML-powered microservices (for example, REST APIs that call SageMaker or Bedrock).</li>
+            <li>Running containerized feature engineering and ETL tasks.</li>
+            <li>Serving custom inference containers when SageMaker is not used.</li>
+            <li>Executing supporting services such as message brokers or monitoring agents in ML platforms.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <h3>Run a task (CLI)</h3>
+          <pre><code class="language-bash">aws ecs run-task \
+  --cluster ml-cluster \
+  --launch-type FARGATE \
+  --task-definition ml-task-def \
+  --network-configuration awsvpcConfiguration={subnets=[subnet-123],securityGroups=[sg-123],assignPublicIp=DISABLED}</code></pre>
+
+          <h3>List services (Python, boto3)</h3>
+          <pre><code class="language-python">import boto3
+
+ecs = boto3.client("ecs")
+resp = ecs.list_services(cluster="ml-cluster")
+for arn in resp.get("serviceArns", []):
+    print(arn)</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Use Fargate for simpler operations when you do not need node-level control.</li>
+            <li>For GPU-based inference, use EC2 launch type with GPU instances.</li>
+            <li>Integrate with Application Load Balancers for HTTP-based inference APIs.</li>
+            <li>Keep containers stateless and externalize state in databases or caches.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>ECS vs. EKS: ECS is AWS-native and simpler; EKS is Kubernetes-based.</li>
+            <li>For serverless containers, pair ECS with Fargate.</li>
+            <li>Use ECS or EKS when exam scenarios mention container orchestration rather than ML-specific platforms.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html">Amazon ECS Developer Guide – Welcome</a></li>
+            <li><a href="https://aws.amazon.com/ecs/">Amazon ECS product page</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html">Amazon ECS Developer Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Amazon ECS runs containerized ML services and pipelines with tight integration into the AWS ecosystem.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

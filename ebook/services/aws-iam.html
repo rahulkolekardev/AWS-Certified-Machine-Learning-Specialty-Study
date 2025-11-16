@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AWS IAM – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Security &amp; Networking</h2>
+          <ul>
+            <li><a href="amazon-vpc.html">Amazon VPC</a></li>
+            <li><a href="aws-iam.html">AWS IAM</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#security-networking">Security &amp; Networking</a> <span aria-hidden="true">›</span>
+          AWS IAM
+        </p>
+        <h1>AWS Identity and Access Management (IAM)</h1>
+        <p>
+          AWS IAM enables you to manage access to AWS services and resources securely. It is foundational for ML
+          workloads, controlling which users, roles, and services can access data, training infrastructure, and model
+          endpoints.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Users, groups, roles, and policies for identity-based access control.</li>
+            <li>Resource-based policies for services like S3 and Lambda.</li>
+            <li>Fine-grained permissions with condition keys.</li>
+            <li>Federation with identity providers (IdPs) using SAML or OIDC.</li>
+            <li>IAM Access Analyzer and policy validation tools.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Defining execution roles for SageMaker training jobs, endpoints, and pipelines.</li>
+            <li>Granting least-privilege access to S3 buckets, data catalogs, and databases used in ML.</li>
+            <li>Controlling who can deploy or modify models in production.</li>
+            <li>Integrating corporate SSO to manage ML platform access.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <h3>Create a role (CLI)</h3>
+          <pre><code class="language-bash">aws iam create-role \
+  --role-name SageMakerExecutionRole \
+  --assume-role-policy-document file://trust-policy.json</code></pre>
+
+          <h3>Attach a policy (Python, boto3)</h3>
+          <pre><code class="language-python">import boto3
+
+iam = boto3.client("iam")
+iam.attach_role_policy(
+    RoleName="SageMakerExecutionRole",
+    PolicyArn="arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess",
+)</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Apply least-privilege principles for all ML-related roles and users.</li>
+            <li>Use separate roles for training, inference, and data engineering workloads.</li>
+            <li>Limit direct user access to data; prefer service roles and federated access.</li>
+            <li>Regularly review and audit IAM policies, especially around data access.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>IAM is central to any question about who can access which ML resources and data.</li>
+            <li>Know the difference between identity-based and resource-based policies.</li>
+            <li>Understand how SageMaker, Bedrock, and other services assume IAM roles on your behalf.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html">IAM User Guide – Introduction</a></li>
+            <li><a href="https://aws.amazon.com/iam/">AWS IAM product page</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html">AWS IAM User Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      IAM provides the essential access control layer for all ML-related services and data in AWS.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon OpenSearch Service – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Search &amp; Analytics</h2>
+          <ul>
+            <li><a href="amazon-emr.html">Amazon EMR</a></li>
+            <li><a href="amazon-athena.html">Amazon Athena</a></li>
+            <li><a href="amazon-redshift.html">Amazon Redshift</a></li>
+            <li><a href="amazon-opensearch-service.html">Amazon OpenSearch Service</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#analytics">Analytics</a> <span aria-hidden="true">›</span>
+          Amazon OpenSearch Service
+        </p>
+        <h1>Amazon OpenSearch Service</h1>
+        <p>
+          Amazon OpenSearch Service is a managed service for deploying and operating OpenSearch and legacy Elasticsearch
+          clusters at scale. It provides search, log analytics, observability, and vector search capabilities, which are
+          increasingly used in ML-powered applications.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Managed OpenSearch clusters with automated provisioning, patching, and scaling.</li>
+            <li>Full-text search, aggregations, and log analytics with OpenSearch Dashboards.</li>
+            <li>Support for vector search and k-NN for similarity and retrieval-augmented generation (RAG) scenarios.</li>
+            <li>Integration with Kinesis Data Firehose and CloudWatch Logs for log ingestion.</li>
+            <li>Fine-grained access control and VPC support.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Storing logs and metrics used to monitor model performance and behavior.</li>
+            <li>Indexing documents and features for search or recommendation systems.</li>
+            <li>Serving as a vector store for embeddings in RAG architectures with Bedrock or other LLMs.</li>
+            <li>Powering interactive dashboards used by data scientists and SREs.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>How it works (high level)</h2>
+          <div class="diagram" role="img" aria-label="Producers send logs and documents to OpenSearch, which supports dashboards and ML-powered search.">
+            <svg viewBox="0 0 540 130" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="20" width="120" height="40" fill="#dbeafe" stroke="#1d4ed8" />
+              <text x="70" y="45" text-anchor="middle" font-size="11">Apps / logs / features</text>
+
+              <rect x="10" y="70" width="120" height="40" fill="#e0f2fe" stroke="#0369a1" />
+              <text x="70" y="95" text-anchor="middle" font-size="11">Firehose / agents</text>
+
+              <rect x="160" y="35" width="160" height="60" fill="#fee2e2" stroke="#b91c1c" />
+              <text x="240" y="65" text-anchor="middle" font-size="11">Amazon OpenSearch Service</text>
+
+              <rect x="350" y="20" width="170" height="35" fill="#fef9c3" stroke="#a16207" />
+              <text x="435" y="42" text-anchor="middle" font-size="11">Dashboards / monitoring</text>
+
+              <rect x="350" y="75" width="170" height="35" fill="#dcfce7" stroke="#15803d" />
+              <text x="435" y="97" text-anchor="middle" font-size="11">Search / RAG / ML apps</text>
+
+              <line x1="130" y1="40" x2="160" y2="55" stroke="#4b5563" marker-end="url(#arrow10)" />
+              <line x1="130" y1="90" x2="160" y2="75" stroke="#4b5563" marker-end="url(#arrow10)" />
+              <line x1="320" y1="55" x2="350" y2="37" stroke="#4b5563" marker-end="url(#arrow10)" />
+              <line x1="320" y1="75" x2="350" y2="92" stroke="#4b5563" marker-end="url(#arrow10)" />
+
+              <defs>
+                <marker id="arrow10" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 z" fill="#4b5563" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <p>Most interactions are via the OpenSearch APIs over HTTPS; the AWS CLI is mainly used for provisioning.</p>
+          <h3>Describe a domain (CLI)</h3>
+          <pre><code class="language-bash">aws opensearch describe-domain \
+  --domain-name ml-search-domain</code></pre>
+
+          <h3>Index a document (Python, requests)</h3>
+          <pre><code class="language-python">import requests, json
+
+endpoint = "https://ml-search-domain-xyz.region.es.amazonaws.com"
+doc = {"id": "123", "title": "Prediction result", "score": 0.82}
+
+resp = requests.put(f"{endpoint}/predictions/_doc/123", json=doc, timeout=5)
+resp.raise_for_status()</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Use VPC-enabled domains to keep traffic private.</li>
+            <li>Design indices with appropriate sharding and lifecycle management (for example, hot-warm architectures for logs).</li>
+            <li>For vector search, store embeddings with k-NN index types and control dimensionality.</li>
+            <li>Use IAM and fine-grained access control to restrict index operations.</li>
+            <li>Consider downstream use (monitoring vs. search vs. RAG) when choosing index mappings.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>OpenSearch appears in scenarios about log analytics, APM, or search over semi-structured data.</li>
+            <li>Vector search + RAG is a strong signal for OpenSearch or similar stores.</li>
+            <li>Firehose or CloudWatch Logs often feed data into OpenSearch in exam architectures.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html">Amazon OpenSearch Service Developer Guide – What Is</a></li>
+            <li><a href="https://aws.amazon.com/opensearch-service/">Amazon OpenSearch Service product page</a></li>
+            <li><a href="https://aws.amazon.com/blogs/opensource/category/open-source-search/open-distro-for-elasticsearch/">AWS blogs on OpenSearch and Elasticsearch</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html">Amazon OpenSearch Service Developer Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Amazon OpenSearch Service bridges ML with search, logging, and emerging vector-based retrieval patterns.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

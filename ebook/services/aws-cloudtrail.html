@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AWS CloudTrail – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Monitoring &amp; Governance</h2>
+          <ul>
+            <li><a href="amazon-cloudwatch.html">Amazon CloudWatch</a></li>
+            <li><a href="aws-cloudtrail.html">AWS CloudTrail</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#monitoring">Monitoring &amp; Governance</a> <span aria-hidden="true">›</span>
+          AWS CloudTrail
+        </p>
+        <h1>AWS CloudTrail</h1>
+        <p>
+          AWS CloudTrail records API calls and account activity across your AWS environment. It is crucial for auditing,
+          compliance, and forensic analysis, including tracking changes and access related to ML resources.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Event history for management events (control plane operations).</li>
+            <li>Data events for object-level access in services like S3 and Lambda.</li>
+            <li>Trails that deliver logs to S3 and optionally to CloudWatch Logs.</li>
+            <li>CloudTrail Lake for querying events centrally.</li>
+            <li>Integration with security and compliance tooling.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Auditing who created, modified, or deleted ML endpoints, training jobs, and data stores.</li>
+            <li>Investigating security incidents involving access to training data or model artifacts.</li>
+            <li>Proving compliance and traceability in regulated ML environments.</li>
+            <li>Feeding security analytics systems with ML-related activity logs.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <h3>Look up events (CLI)</h3>
+          <pre><code class="language-bash">aws cloudtrail lookup-events \
+  --lookup-attributes AttributeKey=EventSource,AttributeValue=sagemaker.amazonaws.com</code></pre>
+
+          <h3>Look up events (Python, boto3)</h3>
+          <pre><code class="language-python">import boto3
+
+ct = boto3.client("cloudtrail")
+
+resp = ct.lookup_events(
+    LookupAttributes=[{
+        "AttributeKey": "EventSource",
+        "AttributeValue": "sagemaker.amazonaws.com",
+    }],
+    MaxResults=10,
+)
+for event in resp.get("Events", []):
+    print(event["EventName"], event["EventTime"])</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Enable CloudTrail in all Regions and for all accounts in an organization.</li>
+            <li>Store CloudTrail logs in a dedicated, locked-down S3 bucket.</li>
+            <li>Use CloudTrail Lake or log analytics tools to query ML-related events efficiently.</li>
+            <li>Combine CloudTrail with CloudWatch logs and metrics for full operational visibility.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>CloudTrail is for API call history and governance, not for performance monitoring.</li>
+            <li>Scenarios involving “who did what, when” or investigations rely on CloudTrail.</li>
+            <li>Know the difference between management events (control plane) and data events.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html">AWS CloudTrail User Guide</a></li>
+            <li><a href="https://aws.amazon.com/cloudtrail/">AWS CloudTrail product page</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html">AWS CloudTrail User Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      CloudTrail complements CloudWatch by providing a detailed record of API activity affecting ML resources and data.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

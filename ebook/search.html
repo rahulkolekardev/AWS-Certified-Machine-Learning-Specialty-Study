@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AWS ML Specialty Ebook – Search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="index.html" data-page="index.html">Home</a>
+          <a href="toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="search.html" data-page="search.html">Search</a>
+          <a href="about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Search help">
+        <section class="sidebar-section">
+          <h2>Search tips</h2>
+          <ul>
+            <li>Search by service name (for example, “SageMaker”).</li>
+            <li>Search by pipeline stage (for example, “ingestion streaming”).</li>
+            <li>Search by concept (for example, “feature store”, “data lake”).</li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs"><a href="index.html">Home</a> <span aria-hidden="true">›</span> Search</p>
+        <h1>Search the ebook</h1>
+        <form id="search-form" aria-label="Search ebook content">
+          <label for="search-input" class="sr-only">Search query</label>
+          <input
+            id="search-input"
+            class="search-input"
+            type="search"
+            name="q"
+            placeholder="Type a service, concept, or keyword…"
+            autocomplete="off"
+          />
+        </form>
+        <section id="search-results" class="search-results" aria-live="polite"></section>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Search runs entirely in your browser over the local JSON index; no data leaves your machine.
+    </footer>
+    <script src="scripts/prism.js"></script>
+    <script src="scripts/main.js"></script>
+  </body>
+</html>
+

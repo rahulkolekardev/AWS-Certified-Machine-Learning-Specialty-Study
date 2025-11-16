@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon Polly – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Prebuilt AI APIs</h2>
+          <ul>
+            <li><a href="amazon-comprehend.html">Amazon Comprehend</a></li>
+            <li><a href="amazon-rekognition.html">Amazon Rekognition</a></li>
+            <li><a href="amazon-transcribe.html">Amazon Transcribe</a></li>
+            <li><a href="amazon-polly.html">Amazon Polly</a></li>
+            <li><a href="amazon-translate.html">Amazon Translate</a></li>
+            <li><a href="amazon-textract.html">Amazon Textract</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#prebuilt-apis">Prebuilt AI APIs</a> <span aria-hidden="true">›</span>
+          Amazon Polly
+        </p>
+        <h1>Amazon Polly</h1>
+        <p>
+          Amazon Polly is a text-to-speech (TTS) service that turns text into lifelike speech. It provides multiple
+          languages and voices, including neural TTS, and is commonly used for voice interfaces and content
+          accessibility.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Standard and neural voices across many languages and locales.</li>
+            <li>Support for SSML to control pronunciation, emphasis, and pacing.</li>
+            <li>Real-time streaming and offline audio file generation.</li>
+            <li>Lexicon support to adjust pronunciation of domain-specific terms.</li>
+            <li>Integration patterns with Amazon Connect, web, and mobile apps.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Providing spoken output for chatbots, virtual assistants, and accessibility features.</li>
+            <li>Generating audio content (for example, news reading or training materials) from text datasets.</li>
+            <li>Creating synthetic speech for testing voice-enabled ML applications.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>How it works (high level)</h2>
+          <div class="diagram" role="img" aria-label="Applications send text to Polly, which returns audio streams or files.">
+            <svg viewBox="0 0 540 130" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="45" width="120" height="40" fill="#dbeafe" stroke="#1d4ed8" />
+              <text x="70" y="70" text-anchor="middle" font-size="11">Text / SSML input</text>
+
+              <rect x="160" y="30" width="160" height="70" fill="#fee2e2" stroke="#b91c1c" />
+              <text x="240" y="55" text-anchor="middle" font-size="11">Amazon Polly</text>
+              <text x="240" y="73" text-anchor="middle" font-size="10">neural &amp; standard voices</text>
+
+              <rect x="350" y="20" width="170" height="35" fill="#ecfdf5" stroke="#047857" />
+              <text x="435" y="42" text-anchor="middle" font-size="11">Audio stream</text>
+
+              <rect x="350" y="75" width="170" height="35" fill="#fef9c3" stroke="#a16207" />
+              <text x="435" y="97" text-anchor="middle" font-size="11">Audio files in S3</text>
+
+              <line x1="130" y1="65" x2="160" y2="65" stroke="#4b5563" marker-end="url(#arrow18)" />
+              <line x1="320" y1="50" x2="350" y2="37" stroke="#4b5563" marker-end="url(#arrow18)" />
+              <line x1="320" y1="80" x2="350" y2="92" stroke="#4b5563" marker-end="url(#arrow18)" />
+
+              <defs>
+                <marker id="arrow18" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 z" fill="#4b5563" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <h3>Synthesize speech (CLI)</h3>
+          <pre><code class="language-bash">aws polly synthesize-speech \
+  --text \"Welcome to the ML Specialty exam.\" \
+  --output-format mp3 \
+  --voice-id Joanna \
+  output.mp3</code></pre>
+
+          <h3>Synthesize speech (Python, boto3)</h3>
+          <pre><code class="language-python">import boto3
+
+polly = boto3.client("polly")
+
+resp = polly.synthesize_speech(
+    Text="Your training job has completed successfully.",
+    OutputFormat="mp3",
+    VoiceId="Joanna",
+)
+with open("message.mp3", "wb") as f:
+    f.write(resp["AudioStream"].read())</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Use neural voices when audio quality is a priority and cost allows.</li>
+            <li>Store frequently used prompts as audio files to reduce repeated synthesis costs.</li>
+            <li>Use SSML and lexicons to control pronunciation of technical terms or brand names.</li>
+            <li>Securely handle generated audio if it contains sensitive content.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>Polly is strictly “text to speech”; Transcribe is “speech to text.”</li>
+            <li>Accessibility and voice interface scenarios typically call for Polly.</li>
+            <li>For IVR and contact center flows, Polly often appears with Amazon Connect.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/polly/latest/dg/what-is.html">Amazon Polly Developer Guide – What Is</a></li>
+            <li><a href="https://aws.amazon.com/polly/">Amazon Polly product page</a></li>
+            <li><a href="https://aws.amazon.com/blogs/machine-learning/category/artificial-intelligence/amazon-polly/">AWS ML Blog – Polly</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/polly/latest/dg/what-is.html">Amazon Polly Developer Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Amazon Polly makes it straightforward to add natural-sounding speech output to ML-powered applications.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

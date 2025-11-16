@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon EBS – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Block &amp; File Storage</h2>
+          <ul>
+            <li><a href="amazon-ebs.html">Amazon EBS</a></li>
+            <li><a href="amazon-efs.html">Amazon EFS</a></li>
+            <li><a href="amazon-fsx.html">Amazon FSx</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#storage">Block &amp; File Storage</a> <span aria-hidden="true">›</span>
+          Amazon EBS
+        </p>
+        <h1>Amazon Elastic Block Store (EBS)</h1>
+        <p>
+          Amazon EBS provides block-level storage volumes for EC2 instances. For ML, it is used as durable, high
+          performance storage for training data, intermediate artifacts, and model files attached to compute instances.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Multiple volume types (gp3, io2, st1, sc1) optimized for performance and cost.</li>
+            <li>Point-in-time snapshots stored in S3.</li>
+            <li>Encryption at rest with KMS.</li>
+            <li>Provisioned IOPS for high-performance workloads.</li>
+            <li>Ability to detach and reattach volumes across compatible instances.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Providing local storage for EC2-based ML training and inference.</li>
+            <li>Storing temporary datasets, caches, or checkpoints.</li>
+            <li>Supporting high I/O workloads such as on-prem-to-cloud migrations or heavy preprocessing.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>CLI examples</h2>
+          <h3>Create a volume (CLI)</h3>
+          <pre><code class="language-bash">aws ec2 create-volume \
+  --size 200 \
+  --volume-type gp3 \
+  --availability-zone us-east-1a</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Use gp3 or io2 for latency-sensitive, high-throughput ML training workloads.</li>
+            <li>Snapshot volumes before risky experiments for quick rollback.</li>
+            <li>Use EBS-optimized instances and appropriate file systems for performance.</li>
+            <li>Delete unused volumes and snapshots to control costs.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>EBS is per-instance block storage, not shared across instances (unlike EFS or FSx).</li>
+            <li>Performance tuning questions may involve volume type and provisioned IOPS selection.</li>
+            <li>For massive datasets and data lakes, S3 is usually the right storage layer, not EBS.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html">Amazon EBS User Guide – What Is Amazon EBS?</a></li>
+            <li><a href="https://aws.amazon.com/ebs/">Amazon EBS product page</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html">Amazon EBS User Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Amazon EBS underpins many EC2-based ML workloads that need fast, durable block storage.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

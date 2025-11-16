@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AWS ML Specialty Ebook – Glossary</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="index.html" data-page="index.html">Home</a>
+          <a href="toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="search.html" data-page="search.html">Search</a>
+          <a href="about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Glossary navigation">
+        <section class="sidebar-section">
+          <h2>Tips</h2>
+          <ul>
+            <li>Use browser search (<kbd>Ctrl</kbd>+<kbd>F</kbd>) on this page.</li>
+            <li>Terms are roughly grouped by theme, not strictly alphabetical.</li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs"><a href="index.html">Home</a> <span aria-hidden="true">›</span> Glossary</p>
+        <h1>Glossary</h1>
+        <dl>
+          <div class="glossary-term">
+            <dt>Data lake</dt>
+            <dd>Centralized storage, typically on S3, that holds raw and curated data in multiple formats for analytics and ML.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>Feature</dt>
+            <dd>An individual input variable used by a model, often engineered from raw data (for example, “days since last purchase”).</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>Model training</dt>
+            <dd>The process of fitting model parameters to data, usually by minimizing a loss function using an optimization algorithm.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>Inference</dt>
+            <dd>Using a trained model to generate predictions for new data, often served through an API endpoint.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>Batch inference</dt>
+            <dd>Running predictions for large datasets offline, writing results to storage such as S3 or a data warehouse.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>Online inference</dt>
+            <dd>Real-time prediction with low latency, typically used in user-facing applications.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>Data drift</dt>
+            <dd>Change in the statistical properties of input data over time, potentially degrading model performance.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>Concept drift</dt>
+            <dd>Change in the relationship between inputs and target labels, requiring retraining or new models.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>Foundation model</dt>
+            <dd>A large pre-trained model (often generative) that can be adapted to many downstream tasks via prompting or fine-tuning.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>Endpoint</dt>
+            <dd>A network-accessible URL or resource used to invoke a model for inference, such as a SageMaker or Bedrock endpoint.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>VPC (Virtual Private Cloud)</dt>
+            <dd>Logically isolated section of the AWS cloud where you define networking, subnets, routing, and security groups.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>IAM role</dt>
+            <dd>An AWS identity with attached permissions that can be assumed by users, services, or applications.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>Managed service</dt>
+            <dd>A service where AWS operates the underlying infrastructure, reducing operational burden (for example, SageMaker, Bedrock).</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>Serverless</dt>
+            <dd>A compute model where you do not manage servers directly and pay primarily for actual usage (for example, Athena, Glue jobs).</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>Streaming data</dt>
+            <dd>Data that is continuously generated and delivered in small records, such as clickstreams or sensor readings.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>Data catalog</dt>
+            <dd>Central metadata store describing datasets, schema, and locations. Glue Data Catalog and Lake Formation build on this concept.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>Spot Instances</dt>
+            <dd>EC2 capacity at discounted prices with the risk of interruption, often used for cost-optimized training or batch jobs.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>Blue/green deployment</dt>
+            <dd>Pattern where a new model version is deployed alongside the old one, with traffic gradually shifted after validation.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>A/B testing</dt>
+            <dd>Experimentation approach that compares two or more variants (for example, models) by splitting live traffic and measuring outcomes.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>Drift monitoring</dt>
+            <dd>Tracking input distributions and model quality metrics over time to detect when retraining is needed.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>Explainability</dt>
+            <dd>Techniques such as SHAP values that help interpret why a model produced a given prediction.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>Feature store</dt>
+            <dd>Central repository for storing, serving, and sharing ML features in online and offline modes.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>GPU instance</dt>
+            <dd>An EC2 instance type with attached GPUs (for example, P- or G-family) used to accelerate training and inference.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>ETL (Extract, Transform, Load)</dt>
+            <dd>Process of ingesting data, transforming it into usable form, and loading it into a target system for analytics or ML.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>Lakehouse</dt>
+            <dd>An architecture that combines data lake flexibility with data warehouse-style management and performance.</dd>
+          </div>
+          <div class="glossary-term">
+            <dt>Serverless inference</dt>
+            <dd>Model hosting where infrastructure is automatically scaled and billed based on requests rather than provisioned capacity.</dd>
+          </div>
+        </dl>
+        <p class="source-line">
+          Definitions aligned with AWS ML and data analytics terminology as used in official documentation. Last updated: 2025-11-16.
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Use the glossary alongside the service pages and practice questions to reinforce terminology for the exam.
+    </footer>
+    <script src="scripts/prism.js"></script>
+    <script src="scripts/main.js"></script>
+  </body>
+</html>
+

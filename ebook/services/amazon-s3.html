@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon S3 – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Storage &amp; Lake</h2>
+          <ul>
+            <li><a href="amazon-s3.html">Amazon S3</a></li>
+            <li><a href="aws-glue.html">AWS Glue</a></li>
+            <li><a href="aws-lake-formation.html">AWS Lake Formation</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#storage-etl">Storage &amp; ETL</a> <span aria-hidden="true">›</span>
+          Amazon S3
+        </p>
+        <h1>Amazon Simple Storage Service (S3)</h1>
+        <p>
+          Amazon S3 is a highly durable, scalable object storage service and the foundation of most AWS data lakes.
+          For ML, it acts as the primary landing zone for raw data, feature datasets, model artifacts, and batch
+          inference outputs, integrating with virtually every analytics and ML service on AWS.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Eleven 9s of durability with multiple storage classes for cost optimization.</li>
+            <li>Bucket policies, ACLs, and IAM for fine-grained access control.</li>
+            <li>Versioning, lifecycle policies, and replication for governance and resilience.</li>
+            <li>S3 Select and Glacier for selective and archival access.</li>
+            <li>Event notifications for downstream processing via Lambda, SNS, or SQS.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Central data lake storage for raw, curated, and feature datasets.</li>
+            <li>Training data source and model artifact storage for SageMaker and custom training.</li>
+            <li>Intermediate storage for ETL outputs from Glue, EMR, and Flink.</li>
+            <li>Sink for batch inference outputs consumed by downstream systems or BI tools.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>How it works (high level)</h2>
+          <div class="diagram" role="img" aria-label="Producers and ETL jobs write to S3 buckets that serve analytics and ML training and inference.">
+            <svg viewBox="0 0 540 130" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="45" width="110" height="40" fill="#dbeafe" stroke="#1d4ed8" />
+              <text x="65" y="70" text-anchor="middle" font-size="11">Producers / ETL</text>
+
+              <rect x="160" y="30" width="130" height="70" fill="#ecfdf5" stroke="#047857" />
+              <text x="225" y="60" text-anchor="middle" font-size="11">Amazon S3 bucket</text>
+
+              <rect x="330" y="20" width="190" height="30" fill="#fef9c3" stroke="#a16207" />
+              <text x="425" y="40" text-anchor="middle" font-size="11">Analytics (Athena, EMR, Redshift)</text>
+
+              <rect x="330" y="75" width="190" height="30" fill="#e0f2fe" stroke="#0369a1" />
+              <text x="425" y="95" text-anchor="middle" font-size="11">ML (SageMaker, Bedrock inputs)</text>
+
+              <line x1="120" y1="65" x2="160" y2="65" stroke="#4b5563" marker-end="url(#arrow4)" />
+              <line x1="290" y1="55" x2="330" y2="35" stroke="#4b5563" marker-end="url(#arrow4)" />
+              <line x1="290" y1="75" x2="330" y2="90" stroke="#4b5563" marker-end="url(#arrow4)" />
+
+              <defs>
+                <marker id="arrow4" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 z" fill="#4b5563" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <h3>Create a bucket and upload data (CLI)</h3>
+          <pre><code class="language-bash">aws s3 mb s3://ml-data-lake-example
+aws s3 cp local-data/ s3://ml-data-lake-example/raw/ --recursive</code></pre>
+
+          <h3>Download training data (Python, boto3)</h3>
+          <pre><code class="language-python">import boto3
+
+s3 = boto3.client("s3")
+bucket = "ml-data-lake-example"
+
+s3.download_file(bucket, "curated/train.parquet", "/tmp/train.parquet")</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Use consistent folder-style prefixes (for example, <code>raw/</code>, <code>curated/</code>, <code>features/</code>, <code>models/</code>) for organization.</li>
+            <li>Store analytics data in columnar formats (Parquet/ORC) partitioned by date and other keys.</li>
+            <li>Enable versioning and lifecycle policies to manage history and costs.</li>
+            <li>Use S3 server-side encryption (SSE) and VPC endpoints for private access from ML services.</li>
+            <li>Leverage S3 object tagging and Lake Formation for governance across many datasets.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>S3 is almost always the default choice for ML data lakes and model artifact storage.</li>
+            <li>Remember partitioning and Parquet when questions mention Athena, Redshift Spectrum, or performance.</li>
+            <li>Private access from SageMaker or Bedrock typically involves S3 VPC endpoints.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html">Amazon S3 User Guide – What is Amazon S3?</a></li>
+            <li><a href="https://aws.amazon.com/s3/">Amazon S3 product page</a></li>
+            <li><a href="https://docs.aws.amazon.com/whitepapers/latest/building-data-lakes/building-data-lakes.html">Building Data Lakes on AWS whitepaper</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html">Amazon S3 User Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      For the AWS ML exam, think of S3 as the central, durable storage layer powering data lakes and ML workflows.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

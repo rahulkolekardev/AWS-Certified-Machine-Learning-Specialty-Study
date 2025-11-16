@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon EFS – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Block &amp; File Storage</h2>
+          <ul>
+            <li><a href="amazon-ebs.html">Amazon EBS</a></li>
+            <li><a href="amazon-efs.html">Amazon EFS</a></li>
+            <li><a href="amazon-fsx.html">Amazon FSx</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#storage">Block &amp; File Storage</a> <span aria-hidden="true">›</span>
+          Amazon EFS
+        </p>
+        <h1>Amazon Elastic File System (EFS)</h1>
+        <p>
+          Amazon EFS is a fully managed, elastic NFS file system for use with AWS compute services. For ML, EFS provides
+          a shared file system that can be mounted by multiple EC2 instances, ECS tasks, or EKS pods simultaneously.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>POSIX-compliant NFS file system accessible from many instances.</li>
+            <li>Automatic growth and shrinkage with usage.</li>
+            <li>Standard and One Zone storage classes, plus infrequent access tiers.</li>
+            <li>Encryption at rest and in transit.</li>
+            <li>Integration with VPC security groups and mount targets.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Sharing training data, code, or checkpoints across multiple training workers.</li>
+            <li>Storing common libraries or datasets for a cluster of ML instances.</li>
+            <li>Feeding inference workloads that run across many containers needing shared files.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>CLI examples</h2>
+          <h3>Create a file system (CLI)</h3>
+          <pre><code class="language-bash">aws efs create-file-system \
+  --creation-token ml-efs \
+  --performance-mode generalPurpose</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Use EFS for shared, file-based workloads that need concurrent access.</li>
+            <li>For high-throughput local storage per instance, prefer EBS or instance store.</li>
+            <li>Place mount targets in subnets close to your compute resources to reduce latency.</li>
+            <li>Leverage lifecycle management to move cold data to infrequent access tiers.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>EFS is the shared file system service; EBS is single-instance block storage.</li>
+            <li>For HPC or highly parallel training needing shared POSIX semantics, EFS or FSx may be referenced.</li>
+            <li>Remember that EFS is regional and can be accessed from multiple AZs in a Region.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html">Amazon EFS User Guide – What Is Amazon EFS?</a></li>
+            <li><a href="https://aws.amazon.com/efs/">Amazon EFS product page</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html">Amazon EFS User Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Amazon EFS offers a simple way to share files across multiple ML compute nodes on AWS.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

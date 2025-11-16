@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AWS ML Specialty Ebook – Practice Questions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="index.html" data-page="index.html">Home</a>
+          <a href="toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="search.html" data-page="search.html">Search</a>
+          <a href="about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Practice navigation">
+        <section class="sidebar-section">
+          <h2>Domains</h2>
+          <ul>
+            <li><a href="#data-engineering">Data Engineering</a></li>
+            <li><a href="#eda">Exploratory Data Analysis</a></li>
+            <li><a href="#modeling">Modeling</a></li>
+            <li><a href="#ml-ops">ML Operations</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs"><a href="index.html">Home</a> <span aria-hidden="true">›</span> Practice Questions</p>
+        <h1>Practice questions</h1>
+        <p>
+          The questions below are unofficial practice items designed to reinforce concepts from the service pages. They
+          do not represent actual AWS exam questions.
+        </p>
+
+        <section id="data-engineering">
+          <h2>Data Engineering</h2>
+
+          <article class="question" id="q1">
+            <h3>Q1. Streaming clickstream ingestion</h3>
+            <p>
+              An e-commerce company needs to collect clickstream events from millions of users with sub-second latency
+              and replay capability for backfills. Which service is the best primary ingestion choice?
+            </p>
+            <ul class="question-options">
+              <li>A. Amazon Kinesis Data Firehose</li>
+              <li>B. Amazon Kinesis Data Streams</li>
+              <li>C. AWS Batch</li>
+              <li>D. Amazon Simple Queue Service (SQS)</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. Kinesis Data Streams provides low-latency ingestion, multiple consumers, and replay via retention windows.</p>
+          </article>
+
+          <article class="question" id="q2">
+            <h3>Q2. Simple log delivery to S3</h3>
+            <p>
+              You need to deliver web server logs from multiple accounts and Regions into Amazon S3 with minimal
+              operational overhead and no custom consumer code. Which service fits best?
+            </p>
+            <ul class="question-options">
+              <li>A. Amazon Kinesis Data Streams with custom Lambda consumers</li>
+              <li>B. Amazon Kinesis Data Firehose</li>
+              <li>C. Amazon EMR</li>
+              <li>D. Amazon Managed Service for Apache Flink</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. Kinesis Data Firehose is purpose-built for managed delivery into S3 and other destinations.</p>
+          </article>
+
+          <article class="question" id="q3">
+            <h3>Q3. Governing data lake permissions</h3>
+            <p>
+              A central data team wants to define fine-grained table- and column-level permissions on a shared data lake
+              in Amazon S3, enforced consistently for Athena and Redshift Spectrum. Which service should they use?
+            </p>
+            <ul class="question-options">
+              <li>A. AWS Glue Data Catalog alone</li>
+              <li>B. Amazon EMR security configurations</li>
+              <li>C. AWS Lake Formation</li>
+              <li>D. AWS Secrets Manager</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> C. Lake Formation provides centralized, fine-grained permissions on lake data and integrates with multiple analytics services.</p>
+          </article>
+
+          <article class="question" id="q4">
+            <h3>Q4. ETL with serverless Spark</h3>
+            <p>
+              You need to run daily Spark jobs transforming raw JSON logs in S3 into partitioned Parquet tables. You want
+              serverless execution and tight integration with a central metadata catalog. Which combination is best?
+            </p>
+            <ul class="question-options">
+              <li>A. Amazon EMR on EC2 with HDFS</li>
+              <li>B. Amazon EMR on EKS</li>
+              <li>C. AWS Glue jobs with the Glue Data Catalog</li>
+              <li>D. Containerized Spark on ECS with custom metadata store</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> C. Glue provides serverless Spark jobs and a managed Data Catalog integrated with S3-based lakes.</p>
+          </article>
+
+          <article class="question" id="q5">
+            <h3>Q5. Low-cost data warehouse for BI</h3>
+            <p>
+              Your analytics team needs sub-second BI dashboards on structured data with complex joins and aggregations.
+              They want columnar storage and MPP query performance. Which service should you choose?
+            </p>
+            <ul class="question-options">
+              <li>A. Amazon Athena</li>
+              <li>B. Amazon OpenSearch Service</li>
+              <li>C. Amazon Redshift</li>
+              <li>D. Amazon EMR</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> C. Redshift is a managed MPP data warehouse optimized for SQL analytics and BI workloads.</p>
+          </article>
+        </section>
+
+        <section id="eda">
+          <h2>Exploratory Data Analysis</h2>
+
+          <article class="question" id="q6">
+            <h3>Q6. Ad-hoc queries on S3 data</h3>
+            <p>
+              A data scientist wants to run ad-hoc SQL queries against Parquet data in S3 without managing servers.
+              Which service is the most appropriate?
+            </p>
+            <ul class="question-options">
+              <li>A. Amazon EMR with Hive</li>
+              <li>B. Amazon Redshift</li>
+              <li>C. Amazon Athena</li>
+              <li>D. Amazon OpenSearch Service</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> C. Athena is serverless and queries S3 directly using standard SQL.</p>
+          </article>
+
+          <article class="question" id="q7">
+            <h3>Q7. Interactive EDA for ML</h3>
+            <p>
+              A team wants collaborative Jupyter-based notebooks for EDA, integrated with S3 data lakes and managed ML
+              training environments. Which service best fits?
+            </p>
+            <ul class="question-options">
+              <li>A. Amazon EMR Notebooks</li>
+              <li>B. Amazon SageMaker Studio</li>
+              <li>C. Self-managed JupyterHub on EC2</li>
+              <li>D. AWS Cloud9</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. SageMaker Studio provides an integrated development environment for ML with notebooks, training, and deployment.</p>
+          </article>
+
+          <article class="question" id="q8">
+            <h3>Q8. Quick dashboards on ML outputs</h3>
+            <p>
+              After training a churn prediction model, analysts want to build dashboards to visualize churn probabilities
+              by cohort and segment with minimal engineering. Which service is the best fit?
+            </p>
+            <ul class="question-options">
+              <li>A. Amazon QuickSight</li>
+              <li>B. Amazon CloudWatch Dashboards</li>
+              <li>C. Amazon OpenSearch Dashboards</li>
+              <li>D. Custom React app on EC2</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> A. QuickSight is a managed BI service with fast visualizations and ML-powered insights.</p>
+          </article>
+        </section>
+
+        <section id="modeling">
+          <h2>Modeling</h2>
+
+          <article class="question" id="q9">
+            <h3>Q9. Managed training vs. EC2</h3>
+            <p>
+              A team trains deep learning models today on self-managed EC2 instances and wants to reduce undifferentiated
+              heavy lifting around spot management, metrics, and scaling. Which service should they move to?
+            </p>
+            <ul class="question-options">
+              <li>A. Remain on EC2 but use Auto Scaling</li>
+              <li>B. Move to AWS Batch</li>
+              <li>C. Move to Amazon SageMaker training jobs</li>
+              <li>D. Use Lambda for training</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> C. SageMaker training manages infrastructure, integrates with spot, tracking, and logs.</p>
+          </article>
+
+          <article class="question" id="q10">
+            <h3>Q10. Custom container for ML</h3>
+            <p>
+              You need to run a training job using a custom algorithm and dependencies not available in built-in
+              SageMaker containers. What is the best pattern?
+            </p>
+            <ul class="question-options">
+              <li>A. Package code as a Lambda function</li>
+              <li>B. Build a Docker image, push it to ECR, and use it with SageMaker training</li>
+              <li>C. Use AWS Glue jobs</li>
+              <li>D. Use Amazon QuickSight</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. SageMaker supports custom containers sourced from ECR for training and inference.</p>
+          </article>
+
+          <article class="question" id="q11">
+            <h3>Q11. Prebuilt NLP vs. custom model</h3>
+            <p>
+              A product team wants to add sentiment analysis to user reviews quickly and with minimal ML expertise.
+              Which service should they choose first?
+            </p>
+            <ul class="question-options">
+              <li>A. Amazon Comprehend</li>
+              <li>B. Amazon SageMaker with custom model</li>
+              <li>C. Amazon Bedrock with a foundation model</li>
+              <li>D. Build from scratch on EC2</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> A. Comprehend provides prebuilt and custom sentiment models via simple APIs and is exam-favored for sentiment scenarios.</p>
+          </article>
+
+          <article class="question" id="q12">
+            <h3>Q12. Generative AI starting point</h3>
+            <p>
+              A startup wants to prototype a chat assistant using multiple foundation models from different providers
+              without managing GPU infrastructure. Which service should they use?
+            </p>
+            <ul class="question-options">
+              <li>A. Amazon SageMaker JumpStart</li>
+              <li>B. Amazon Bedrock</li>
+              <li>C. EC2 with custom models</li>
+              <li>D. AWS Batch</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. Bedrock offers managed access to multiple foundation models with a unified API.</p>
+          </article>
+        </section>
+
+        <section id="ml-ops">
+          <h2>ML Operations</h2>
+
+          <article class="question" id="q13">
+            <h3>Q13. Monitoring model latency</h3>
+            <p>
+              You deploy a real-time inference endpoint that must stay under 50 ms p99 latency. Which service should you
+              primarily use to track latency metrics and trigger alarms?
+            </p>
+            <ul class="question-options">
+              <li>A. AWS CloudTrail</li>
+              <li>B. Amazon CloudWatch</li>
+              <li>C. Amazon QuickSight</li>
+              <li>D. AWS Config</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. CloudWatch stores metrics and supports alarms and dashboards for latency tracking.</p>
+          </article>
+
+          <article class="question" id="q14">
+            <h3>Q14. Audit of model access</h3>
+            <p>
+              A regulated customer must know who created, modified, or invoked a given ML endpoint over time. Which
+              service provides the API activity history?
+            </p>
+            <ul class="question-options">
+              <li>A. Amazon CloudWatch Logs</li>
+              <li>B. AWS CloudTrail</li>
+              <li>C. Amazon OpenSearch Service</li>
+              <li>D. Amazon QuickSight</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. CloudTrail records API calls, including SageMaker and Bedrock operations, for auditing.</p>
+          </article>
+
+          <article class="question" id="q15">
+            <h3>Q15. Private model endpoint access</h3>
+            <p>
+              A bank wants to restrict access to ML endpoints so they are reachable only from application servers inside
+              private subnets. Which combination is most appropriate?
+            </p>
+            <ul class="question-options">
+              <li>A. Public endpoints with API keys</li>
+              <li>B. Endpoints in a VPC with security groups and private subnets</li>
+              <li>C. Endpoints exposed via CloudFront</li>
+              <li>D. Use IAM alone without network controls</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. VPC integration with security groups and subnets is the standard pattern for private access.</p>
+          </article>
+        </section>
+
+        <section id="more-questions">
+          <h2>Additional mixed-domain questions</h2>
+
+          <article class="question" id="q16">
+            <h3>Q16. Cost-optimized storage for raw data</h3>
+            <p>
+              A team is collecting terabytes of semi-structured logs that will be used occasionally for ML retraining.
+              They need durable, low-cost storage and can tolerate higher retrieval latency. Which storage class is most
+              appropriate?
+            </p>
+            <ul class="question-options">
+              <li>A. EBS io2</li>
+              <li>B. S3 Standard</li>
+              <li>C. S3 Glacier Flexible Retrieval</li>
+              <li>D. S3 Intelligent-Tiering</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> D. Intelligent-Tiering automatically moves objects between frequent and infrequent tiers, reducing cost without application changes.</p>
+          </article>
+
+          <article class="question" id="q17">
+            <h3>Q17. Schema-on-read vs. schema-on-write</h3>
+            <p>
+              An organization wants to ingest diverse data quickly and decide on structure later during analysis. Which
+              combination most directly supports schema-on-read?
+            </p>
+            <ul class="question-options">
+              <li>A. Amazon RDS with rigid schemas</li>
+              <li>B. Amazon S3 + AWS Glue Data Catalog + Athena</li>
+              <li>C. Amazon Redshift only</li>
+              <li>D. Amazon DynamoDB</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. Storing data in S3 and defining tables in the Glue catalog for Athena queries is a canonical schema-on-read pattern.</p>
+          </article>
+
+          <article class="question" id="q18">
+            <h3>Q18. Data lineage and governance</h3>
+            <p>
+              A financial institution needs to know which downstream tables are affected when a source S3 prefix changes
+              structure. Which service combination best helps manage governance and permissions over the lake?
+            </p>
+            <ul class="question-options">
+              <li>A. CloudTrail and CloudWatch logs</li>
+              <li>B. Glue Data Catalog and Lake Formation</li>
+              <li>C. QuickSight and Athena</li>
+              <li>D. EC2 and EBS</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. Glue and Lake Formation provide centralized metadata and fine-grained access control over data lake assets.</p>
+          </article>
+
+          <article class="question" id="q19">
+            <h3>Q19. Handling skewed keys in Kinesis</h3>
+            <p>
+              A real-time feature pipeline on Kinesis Data Streams shows one shard at 90% utilization while others are
+              mostly idle. What is the <em>first</em> action to consider?
+            </p>
+            <ul class="question-options">
+              <li>A. Enable Enhanced Fan-Out</li>
+              <li>B. Increase stream retention</li>
+              <li>C. Randomize or shard on a less skewed partition key</li>
+              <li>D. Switch to Kinesis Data Firehose</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> C. A hot partition key causes shard hot spots; adjust partitioning before scaling shard count blindly.</p>
+          </article>
+
+          <article class="question" id="q20">
+            <h3>Q20. Choosing Glue vs. EMR</h3>
+            <p>
+              A team needs to run nightly ETL on S3 data using standard Spark transformations. They prefer minimal
+              infrastructure management and serverless execution. Which service is the best fit?
+            </p>
+            <ul class="question-options">
+              <li>A. Amazon EMR on EC2</li>
+              <li>B. Amazon EMR on EKS</li>
+              <li>C. AWS Glue jobs</li>
+              <li>D. Self-managed Spark on EC2</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> C. Glue provides serverless Spark ETL with integrated cataloging and scheduling.</p>
+          </article>
+
+          <article class="question" id="q21">
+            <h3>Q21. Feature store benefits</h3>
+            <p>
+              Which benefit is <strong>most</strong> associated with using SageMaker Feature Store instead of manually
+              maintaining feature tables in S3 and Redshift?
+            </p>
+            <ul class="question-options">
+              <li>A. Higher S3 durability</li>
+              <li>B. Automatic hyperparameter tuning</li>
+              <li>C. Consistent online and offline feature access with point-in-time correctness</li>
+              <li>D. Free model monitoring</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> C. Feature Store’s primary value is consistent feature definitions and online/offline access with correct time travel semantics.</p>
+          </article>
+
+          <article class="question" id="q22">
+            <h3>Q22. When to fine-tune vs. prompt</h3>
+            <p>
+              A team using Amazon Bedrock wants to adapt a foundation model to a narrow domain. They have a small set of
+              canonical responses and heavy sensitivity to hallucinations. What should they prioritize first?
+            </p>
+            <ul class="question-options">
+              <li>A. Immediate full fine-tuning of the model</li>
+              <li>B. Carefully engineered prompts and retrieval-augmented generation from a governed knowledge base</li>
+              <li>C. Building a custom model from scratch in SageMaker</li>
+              <li>D. Using only smaller, cheaper models</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. RAG with good prompts and curated data often addresses domain adaptation and hallucinations before expensive fine-tuning is needed.</p>
+          </article>
+
+          <article class="question" id="q23">
+            <h3>Q23. Training on EC2 vs. SageMaker</h3>
+            <p>
+              A startup already has containerized training code that runs on Kubernetes on-premises. They want to move
+              to AWS quickly while keeping their existing containers and orchestration logic. Which approach best fits?
+            </p>
+            <ul class="question-options">
+              <li>A. Port the workload to SageMaker built-in algorithms</li>
+              <li>B. Run the same containers on Amazon EKS with managed node groups</li>
+              <li>C. Reimplement training in AWS Lambda</li>
+              <li>D. Use Glue jobs with PySpark</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. EKS lets them reuse Kubernetes manifests and containers with minimal code changes.</p>
+          </article>
+
+          <article class="question" id="q24">
+            <h3>Q24. Batch vs. real-time inference</h3>
+            <p>
+              A fraud detection model must respond within 150 ms for each transaction. Which option is most appropriate?
+            </p>
+            <ul class="question-options">
+              <li>A. Nightly SageMaker batch transform jobs</li>
+              <li>B. SageMaker real-time endpoint behind an Application Load Balancer</li>
+              <li>C. Glue job that writes scores to Redshift hourly</li>
+              <li>D. Offline scoring with Athena queries</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. Real-time endpoints are designed for low-latency synchronous inference.</p>
+          </article>
+
+          <article class="question" id="q25">
+            <h3>Q25. Parallel hyperparameter search</h3>
+            <p>
+              You need to perform a large hyperparameter search across many configurations and want managed orchestration
+              with automatic early stopping. Which service should you choose?
+            </p>
+            <ul class="question-options">
+              <li>A. Amazon EC2 Auto Scaling directly</li>
+              <li>B. Amazon SageMaker hyperparameter tuning jobs</li>
+              <li>C. AWS Batch array jobs</li>
+              <li>D. AWS Lambda fan-out</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. SageMaker tuning jobs manage parallel trials, search strategies, and early stopping for you.</p>
+          </article>
+
+          <article class="question" id="q26">
+            <h3>Q26. Data imbalance handling</h3>
+            <p>
+              A binary classification dataset has only 1% positive events. Which technique is <strong>least</strong>
+              appropriate as a first remedy?
+            </p>
+            <ul class="question-options">
+              <li>A. Change the evaluation metric to ROC AUC or precision/recall</li>
+              <li>B. Use stratified sampling when splitting train and test sets</li>
+              <li>C. Randomly undersample the majority class or oversample the minority class</li>
+              <li>D. Ignore the issue and optimize vanilla accuracy</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> D. Focusing solely on accuracy can hide poor performance on the minority class.</p>
+          </article>
+
+          <article class="question" id="q27">
+            <h3>Q27. Model explainability requirement</h3>
+            <p>
+              A regulator requires explanations for individual loan decisions. Which SageMaker capability most directly
+              addresses this?
+            </p>
+            <ul class="question-options">
+              <li>A. SageMaker Pipelines</li>
+              <li>B. SageMaker Clarify</li>
+              <li>C. SageMaker Ground Truth</li>
+              <li>D. SageMaker Processing</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. Clarify provides bias detection and feature attribution explanations for models.</p>
+          </article>
+
+          <article class="question" id="q28">
+            <h3>Q28. Model versioning strategy</h3>
+            <p>
+              You must run A/B tests on two model versions for an API. Which SageMaker feature helps you route a small
+              percentage of traffic to a new model and compare metrics?
+            </p>
+            <ul class="question-options">
+              <li>A. Multi-Model Endpoints</li>
+              <li>B. Endpoint auto scaling</li>
+              <li>C. Production variants with traffic shifting</li>
+              <li>D. Batch Transform jobs</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> C. Production variants support weighted traffic routing for canary and A/B deployments.</p>
+          </article>
+
+          <article class="question" id="q29">
+            <h3>Q29. Monitoring data drift</h3>
+            <p>
+              Six months after deployment, a churn model’s performance degrades. Input variable distributions have
+              shifted. Which SageMaker capability is specifically designed to detect this?
+            </p>
+            <ul class="question-options">
+              <li>A. Model Monitor data quality monitoring</li>
+              <li>B. Ground Truth labeling jobs</li>
+              <li>C. Notebook instance metrics</li>
+              <li>D. Training job logs</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> A. Model Monitor tracks data quality and drift metrics using baseline statistics.</p>
+          </article>
+
+          <article class="question" id="q30">
+            <h3>Q30. Choosing OpenSearch vs. Redshift</h3>
+            <p>
+              A team wants to build a semantic search feature for support articles using vector embeddings and
+              keyword-based search. Which service is more appropriate as the primary search backend?
+            </p>
+            <ul class="question-options">
+              <li>A. Amazon Redshift</li>
+              <li>B. Amazon OpenSearch Service</li>
+              <li>C. Amazon RDS for PostgreSQL</li>
+              <li>D. AWS Glue Data Catalog</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. OpenSearch supports both full-text search and vector search for similarity queries.</p>
+          </article>
+
+          <article class="question" id="q31">
+            <h3>Q31. Logging inference errors</h3>
+            <p>
+              Your inference microservice runs on ECS and occasionally returns HTTP 500 errors. You need to quickly
+              diagnose root causes using logs. Where should you centralize logs first?</p>
+            <ul class="question-options">
+              <li>A. Store logs only on the container’s local filesystem</li>
+              <li>B. Send stdout/stderr to CloudWatch Logs using the ECS logging driver</li>
+              <li>C. Write logs directly into an S3 bucket</li>
+              <li>D. Emit logs only as CloudWatch custom metrics</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. ECS integrates directly with CloudWatch Logs for centralized, searchable logging.</p>
+          </article>
+
+          <article class="question" id="q32">
+            <h3>Q32. Least privilege for training jobs</h3>
+            <p>
+              A SageMaker training job only needs read access to a specific S3 prefix and permission to write logs to
+              CloudWatch. How should you structure permissions?</p>
+            <ul class="question-options">
+              <li>A. Attach <code>AmazonS3FullAccess</code> and <code>AdministratorAccess</code> to the role</li>
+              <li>B. Use a custom IAM role granting read-only access to that prefix and logging permissions</li>
+              <li>C. Grant the job access keys for a privileged IAM user</li>
+              <li>D. Configure bucket ACLs and remove IAM entirely</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. A minimally scoped execution role satisfies least-privilege requirements.</p>
+          </article>
+
+          <article class="question" id="q33">
+            <h3>Q33. Multi-account ML governance</h3>
+            <p>
+              An enterprise separates dev, test, and prod into different AWS accounts. They want to centrally manage
+              permissions to a shared S3 data lake used by all accounts. Which service helps most?</p>
+            <ul class="question-options">
+              <li>A. Per-account bucket policies only</li>
+              <li>B. AWS Lake Formation with cross-account permissions</li>
+              <li>C. EC2 security groups</li>
+              <li>D. AWS CloudShell</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. Lake Formation provides cross-account fine-grained access for lake data.</p>
+          </article>
+
+          <article class="question" id="q34">
+            <h3>Q34. Real-time anomaly detection without custom models</h3>
+            <p>
+              A BI team wants basic anomaly detection on key metrics with minimal ML effort. Which service feature is
+              designed for this?</p>
+            <ul class="question-options">
+              <li>A. QuickSight ML Insights</li>
+              <li>B. CloudTrail Lake</li>
+              <li>C. Glue job bookmarks</li>
+              <li>D. S3 Inventory reports</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> A. QuickSight ML Insights can highlight anomalies and forecasts within dashboards.</p>
+          </article>
+
+          <article class="question" id="q35">
+            <h3>Q35. Handling large models in deployment</h3>
+            <p>
+              A large transformer model barely fits into GPU memory. Which deployment pattern in SageMaker can help host
+              multiple related models efficiently on the same fleet?</p>
+            </p>
+            <ul class="question-options">
+              <li>A. Multi-Model Endpoints</li>
+              <li>B. Batch Transform</li>
+              <li>C. Asynchronous inference</li>
+              <li>D. Data parallel training</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> A. Multi-Model Endpoints load models from S3 on demand onto shared hosts, improving utilization for many models.</p>
+          </article>
+
+          <article class="question" id="q36">
+            <h3>Q36. IoT data preprocessing pattern</h3>
+            <p>
+              Devices send high-frequency sensor data over MQTT. Only aggregated summaries are needed in the cloud for
+              training and analytics. Which pattern best reduces bandwidth costs?</p>
+            <ul class="question-options">
+              <li>A. Send all raw data to S3 and aggregate with Glue</li>
+              <li>B. Use AWS IoT Greengrass to aggregate locally and publish aggregates</li>
+              <li>C. Discard data on the device and only send alerts</li>
+              <li>D. Use CloudWatch Logs directly from the device</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. Greengrass supports local processing and aggregation before sending condensed data upstream.</p>
+          </article>
+
+          <article class="question" id="q37">
+            <h3>Q37. Handling PII in training data</h3>
+            <p>
+              Training data contains sensitive customer identifiers and PII fields. What is the <strong>best</strong>
+              practice for using this data in the cloud?</p>
+            <ul class="question-options">
+              <li>A. Store unencrypted data in S3 but restrict IAM access</li>
+              <li>B. Encrypt data, minimize fields, and tokenize or hash identifiers where possible</li>
+              <li>C. Anonymize data by replacing all fields with random values</li>
+              <li>D. Copy the data back on-premises and delete it from AWS</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. A combination of encryption, minimization, and tokenization balances privacy and utility.</p>
+          </article>
+
+          <article class="question" id="q38">
+            <h3>Q38. Latency troubleshooting</h3>
+            <p>
+              Your SageMaker endpoint’s p99 latency suddenly increases. CPU and GPU utilization are low. What should you
+              check first?</p>
+            <ul class="question-options">
+              <li>A. Whether the model code is logging too much to CloudWatch</li>
+              <li>B. Whether the endpoint is configured in the wrong Region</li>
+              <li>C. Whether the client is making synchronous calls over a high-latency network path or adding serialization overhead</li>
+              <li>D. Whether EBS volumes are overprovisioned</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> C. Network path, client-side serialization, and VPC routing often cause latency issues when utilization is low.</p>
+          </article>
+
+          <article class="question" id="q39">
+            <h3>Q39. Choosing between Redshift and Athena</h3>
+            <p>
+              You need highly concurrent BI dashboards with sub-second response times on curated warehouse-style data.
+              Which analytics service is more appropriate as the primary store?</p>
+            <ul class="question-options">
+              <li>A. Athena only</li>
+              <li>B. Redshift</li>
+              <li>C. EMR</li>
+              <li>D. DynamoDB</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. Redshift is optimized for high-concurrency, low-latency analytic workloads and BI.</p>
+          </article>
+
+          <article class="question" id="q40">
+            <h3>Q40. Pipeline orchestration choice</h3>
+            <p>
+              You want to build an auditable ML pipeline with steps for data preprocessing, training, evaluation, and
+              conditional deployment, integrated tightly with SageMaker. Which tool is best?</p>
+            <ul class="question-options">
+              <li>A. AWS Glue Workflows</li>
+              <li>B. Amazon Managed Workflows for Apache Airflow</li>
+              <li>C. SageMaker Pipelines</li>
+              <li>D. Lambda functions invoked manually</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> C. SageMaker Pipelines natively orchestrates ML-specific steps and metadata.</p>
+          </article>
+
+          <article class="question" id="q41">
+            <h3>Q41. Choosing QuickSight vs. custom UI</h3>
+            <p>
+              A product manager wants to explore model outputs and drill into customer segments without engineering a
+              bespoke web UI. Which service best fits?</p>
+            <ul class="question-options">
+              <li>A. Amazon QuickSight</li>
+              <li>B. AWS Step Functions</li>
+              <li>C. Amazon Rekognition</li>
+              <li>D. AWS X-Ray</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> A. QuickSight provides interactive dashboards and exploratory analysis with minimal engineering.</p>
+          </article>
+
+          <article class="question" id="q42">
+            <h3>Q42. Multi-region model deployment</h3>
+            <p>
+              A global application needs low-latency inference in multiple Regions and independent failover. Which is
+              the most appropriate deployment strategy?</p>
+            <ul class="question-options">
+              <li>A. Single-region endpoint with global CloudFront distribution</li>
+              <li>B. Separate endpoints per Region and Region-local routing in the app</li>
+              <li>C. Multi-AZ endpoint in one Region</li>
+              <li>D. Lambda@Edge only</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. Regional endpoints minimize latency and provide independent failover per Region.</p>
+          </article>
+
+          <article class="question" id="q43">
+            <h3>Q43. Reducing training cost with Spot</h3>
+            <p>
+              A non-critical nightly training job can tolerate interruptions as long as it eventually completes. Which
+              cost optimization is most appropriate?</p>
+            <ul class="question-options">
+              <li>A. Use On-Demand EC2 only</li>
+              <li>B. Use SageMaker managed Spot training with checkpointing</li>
+              <li>C. Use Lambda for training</li>
+              <li>D. Use EBS Magnetic volumes</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. Managed Spot training in SageMaker can significantly reduce training costs while handling interruptions.</p>
+          </article>
+
+          <article class="question" id="q44">
+            <h3>Q44. Labeling UI for domain experts</h3>
+            <p>
+              Domain experts need a managed, web-based UI to label images and text for an ML project. They are not
+              familiar with MTurk. Which service should you recommend?</p>
+            <ul class="question-options">
+              <li>A. SageMaker Ground Truth</li>
+              <li>B. AWS Batch</li>
+              <li>C. Amazon Q</li>
+              <li>D. Amazon QuickSight</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> A. Ground Truth provides labeling UIs and workflows for various data types, using internal or external workforces.</p>
+          </article>
+
+          <article class="question" id="q45">
+            <h3>Q45. Text analytics pipeline design</h3>
+            <p>
+              You must analyze thousands of product reviews daily for sentiment and key topics. Which pipeline is most
+              appropriate?</p>
+            <ul class="question-options">
+              <li>A. Kinesis Data Streams → Lambda → Comprehend → S3</li>
+              <li>B. S3 → Glue → EMR → Textract</li>
+              <li>C. DynamoDB Streams → EC2 → Polly</li>
+              <li>D. CloudTrail → Athena → Rekognition</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> A. Comprehend provides sentiment and key phrase detection; streams and Lambda handle ingestion and orchestration.</p>
+          </article>
+
+          <article class="question" id="q46">
+            <h3>Q46. Document processing workflow</h3>
+            <p>
+              A bank scans loan forms and wants to extract structured fields like borrower name, income, and loan amount
+              for downstream risk models. Which primary service should you use?</p>
+            <ul class="question-options">
+              <li>A. Amazon Textract</li>
+              <li>B. Amazon Rekognition</li>
+              <li>C. Amazon Comprehend</li>
+              <li>D. Amazon Transcribe</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> A. Textract is purpose-built for extracting structured data from documents.</p>
+          </article>
+
+          <article class="question" id="q47">
+            <h3>Q47. Centralizing ML logs</h3>
+            <p>
+              An organization has ML services across multiple accounts and wants a centralized, searchable view of logs
+              and metrics. Which architecture pattern is commonly recommended?</p>
+            <ul class="question-options">
+              <li>A. Each account maintains separate CloudWatch and OpenSearch clusters</li>
+              <li>B. Centralized logging account with aggregated CloudWatch Logs subscriptions and OpenSearch domains</li>
+              <li>C. Only S3 server access logs</li>
+              <li>D. Directly writing logs to local files on EC2</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. A central logging account pattern is standard for multi-account observability.</p>
+          </article>
+
+          <article class="question" id="q48">
+            <h3>Q48. Choosing Firehose vs. Flink</h3>
+            <p>
+              A team needs to continuously aggregate event counts per user over one-minute windows and produce real-time
+              features for a recommendation model. Which service is more appropriate?</p>
+            <ul class="question-options">
+              <li>A. Kinesis Data Firehose</li>
+              <li>B. Amazon Managed Service for Apache Flink</li>
+              <li>C. AWS Batch</li>
+              <li>D. Amazon SQS</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> B. Flink supports stateful, windowed stream processing and feature engineering in real time.</p>
+          </article>
+
+          <article class="question" id="q49">
+            <h3>Q49. Handling prediction skew</h3>
+            <p>
+              An online model shows good offline validation metrics but poor live performance. The input feature
+              distributions differ significantly between training and production. What is this issue called?</p>
+            <ul class="question-options">
+              <li>A. Overfitting</li>
+              <li>B. Label leakage</li>
+              <li>C. Training-serving skew</li>
+              <li>D. Hyperparameter instability</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> C. Training-serving skew occurs when feature pipelines differ between training and production, leading to mismatched distributions.</p>
+          </article>
+
+          <article class="question" id="q50">
+            <h3>Q50. Exam strategy</h3>
+            <p>
+              During the exam, you encounter a question about a managed training and deployment platform with built-in
+              experiment tracking, pipelines, and feature store. Which service is almost certainly the intended choice?</p>
+            <ul class="question-options">
+              <li>A. Amazon SageMaker</li>
+              <li>B. Amazon EC2</li>
+              <li>C. Amazon Bedrock</li>
+              <li>D. AWS Batch</li>
+            </ul>
+            <p class="question-answer"><strong>Answer:</strong> A. The description clearly matches SageMaker’s capabilities as the central managed ML platform.</p>
+          </article>
+        </section>
+
+        <p class="source-line">
+          Questions inspired by AWS exam blueprints and official service capabilities, not by any actual exam questions. Last updated: 2025-11-16.
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Review explanations carefully and follow links from the relevant service pages for deeper study.
+    </footer>
+    <script src="scripts/prism.js"></script>
+    <script src="scripts/main.js"></script>
+  </body>
+</html>

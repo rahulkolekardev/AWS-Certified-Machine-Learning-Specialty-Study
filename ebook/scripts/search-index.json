@@ -1,0 +1,255 @@
+[
+  {
+    "title": "Home – AWS ML Specialty Ebook",
+    "slug": "index.html",
+    "summary": "Overview of the AWS ML Specialty ebook, how to use it for exam preparation, and high-level mapping of services to exam domains.",
+    "keywords": ["home", "overview", "exam", "domains"]
+  },
+  {
+    "title": "Table of Contents",
+    "slug": "toc.html",
+    "summary": "Structured table of contents grouping all covered AWS services by machine learning pipeline role, with deep links to each service page.",
+    "keywords": ["toc", "table of contents", "navigation", "pipeline"]
+  },
+  {
+    "title": "About & License",
+    "slug": "about.html",
+    "summary": "Explains the purpose of the ebook, sources and citation approach, license information, and how to update and extend the content.",
+    "keywords": ["about", "license", "sources", "citation"]
+  },
+  {
+    "title": "Cheat Sheet",
+    "slug": "cheat-sheet.html",
+    "summary": "Concise exam-day cheat sheet with quick comparisons between AWS ML-related services across ingestion, storage, analytics, modeling, and operations.",
+    "keywords": ["cheat sheet", "summary", "comparison", "exam tips"]
+  },
+  {
+    "title": "Practice Questions",
+    "slug": "practice-questions.html",
+    "summary": "Collection of practice questions and explanations across data engineering, exploratory analysis, modeling, and ML operations for the AWS ML Specialty exam.",
+    "keywords": ["questions", "practice", "exam", "quiz"]
+  },
+  {
+    "title": "Glossary",
+    "slug": "glossary.html",
+    "summary": "Glossary of common AWS and machine learning terms, including data lake, feature, inference, drift, feature store, and serverless inference definitions.",
+    "keywords": ["glossary", "definitions", "terms", "vocabulary"]
+  },
+  {
+    "title": "Search",
+    "slug": "search.html",
+    "summary": "Client-side search interface that lets you query the ebook content using tokens and see highlighted matches with short snippets.",
+    "keywords": ["search", "index", "results", "keywords"]
+  },
+  {
+    "title": "Amazon Kinesis Data Streams",
+    "slug": "services/amazon-kinesis-data-streams.html",
+    "summary": "Scalable, durable streaming service for low-latency ingestion with custom consumers, replay, and shard-based scaling used for ML feature pipelines.",
+    "keywords": ["kinesis", "data streams", "streaming", "ingestion"]
+  },
+  {
+    "title": "Amazon Kinesis Data Firehose",
+    "slug": "services/amazon-kinesis-data-firehose.html",
+    "summary": "Fully managed service for delivering streaming data into S3, Redshift, and OpenSearch with buffering, compression, and optional transforms.",
+    "keywords": ["kinesis", "firehose", "delivery", "streaming"]
+  },
+  {
+    "title": "Amazon Managed Service for Apache Flink",
+    "slug": "services/amazon-managed-service-for-apache-flink.html",
+    "summary": "Managed Apache Flink service for stateful stream processing, real-time feature engineering, and complex event processing on Kinesis or Kafka streams.",
+    "keywords": ["flink", "stream processing", "kinesis analytics", "windows"]
+  },
+  {
+    "title": "Amazon S3",
+    "slug": "services/amazon-s3.html",
+    "summary": "Durable, scalable object storage and the core data lake layer for ML training data, features, artifacts, and batch inference outputs.",
+    "keywords": ["s3", "data lake", "storage", "objects"]
+  },
+  {
+    "title": "AWS Glue",
+    "slug": "services/aws-glue.html",
+    "summary": "Serverless data integration service with a managed Data Catalog, crawlers, and Spark-based ETL jobs for building curated ML datasets.",
+    "keywords": ["glue", "etl", "data catalog", "jobs"]
+  },
+  {
+    "title": "AWS Lake Formation",
+    "slug": "services/aws-lake-formation.html",
+    "summary": "Service for building and securing governed data lakes with fine-grained table and column permissions over S3 data via the Glue Data Catalog.",
+    "keywords": ["lake formation", "governance", "permissions", "data lake"]
+  },
+  {
+    "title": "Amazon EMR",
+    "slug": "services/amazon-emr.html",
+    "summary": "Managed big data platform for running Spark, Hadoop, and other engines on EC2 or serverless for large-scale feature engineering and ML preprocessing.",
+    "keywords": ["emr", "spark", "hadoop", "big data"]
+  },
+  {
+    "title": "Amazon Athena",
+    "slug": "services/amazon-athena.html",
+    "summary": "Serverless SQL query service for analyzing data in S3 using the Glue Data Catalog, ideal for ad-hoc exploration and lightweight feature creation.",
+    "keywords": ["athena", "sql", "s3", "serverless analytics"]
+  },
+  {
+    "title": "Amazon Redshift",
+    "slug": "services/amazon-redshift.html",
+    "summary": "Managed cloud data warehouse with columnar storage, Spectrum for S3, and Redshift ML for in-database model training integrated with SageMaker.",
+    "keywords": ["redshift", "data warehouse", "spectrum", "analytics"]
+  },
+  {
+    "title": "Amazon OpenSearch Service",
+    "slug": "services/amazon-opensearch-service.html",
+    "summary": "Managed OpenSearch clusters for search, log analytics, and vector search used in ML monitoring and retrieval-augmented generation solutions.",
+    "keywords": ["opensearch", "search", "logs", "vector"]
+  },
+  {
+    "title": "Amazon Mechanical Turk",
+    "slug": "services/amazon-mechanical-turk.html",
+    "summary": "Crowdsourcing marketplace for human intelligence tasks used to obtain labels and human judgments for machine learning datasets.",
+    "keywords": ["mechanical turk", "labeling", "crowdsourcing"]
+  },
+  {
+    "title": "Amazon SageMaker",
+    "slug": "services/amazon-sagemaker.html",
+    "summary": "End-to-end managed ML platform with Studio, training jobs, endpoints, Pipelines, Feature Store, and Model Monitor for production ML workflows.",
+    "keywords": ["sagemaker", "training", "endpoints", "pipelines", "feature store"]
+  },
+  {
+    "title": "Amazon Bedrock",
+    "slug": "services/amazon-bedrock.html",
+    "summary": "Managed generative AI service providing access to multiple foundation models with guardrails, knowledge bases, and agents for building genAI apps.",
+    "keywords": ["bedrock", "foundation models", "generative ai", "rag"]
+  },
+  {
+    "title": "Amazon Q",
+    "slug": "services/amazon-q.html",
+    "summary": "Family of generative AI assistants such as Q Developer and Q Business that help developers and business users work with AWS and enterprise data.",
+    "keywords": ["amazon q", "assistant", "developer", "business"]
+  },
+  {
+    "title": "Amazon Comprehend",
+    "slug": "services/amazon-comprehend.html",
+    "summary": "NLP service for sentiment analysis, key phrases, entities, and custom classification or entity recognition on text data.",
+    "keywords": ["comprehend", "nlp", "sentiment", "entities"]
+  },
+  {
+    "title": "Amazon Rekognition",
+    "slug": "services/amazon-rekognition.html",
+    "summary": "Computer vision APIs for detecting objects, scenes, faces, text in images, unsafe content, and custom labels in images and videos.",
+    "keywords": ["rekognition", "vision", "images", "faces"]
+  },
+  {
+    "title": "Amazon Transcribe",
+    "slug": "services/amazon-transcribe.html",
+    "summary": "Automatic speech recognition (ASR) service for converting speech to text via batch and streaming transcription with custom vocabularies.",
+    "keywords": ["transcribe", "speech to text", "asr", "audio"]
+  },
+  {
+    "title": "Amazon Polly",
+    "slug": "services/amazon-polly.html",
+    "summary": "Text-to-speech service with standard and neural voices for generating natural-sounding audio from text and SSML inputs.",
+    "keywords": ["polly", "text to speech", "tts", "audio"]
+  },
+  {
+    "title": "Amazon Translate",
+    "slug": "services/amazon-translate.html",
+    "summary": "Neural machine translation service for real-time and batch translation with custom terminology and domain adaptation features.",
+    "keywords": ["translate", "translation", "languages", "nmt"]
+  },
+  {
+    "title": "Amazon Textract",
+    "slug": "services/amazon-textract.html",
+    "summary": "Document analysis service that extracts text, forms, tables, and key-value pairs from scanned documents and PDFs.",
+    "keywords": ["textract", "document", "ocr", "forms"]
+  },
+  {
+    "title": "Amazon EC2",
+    "slug": "services/amazon-ec2.html",
+    "summary": "Virtual machine service providing CPU and GPU instances where you can run custom ML training, inference, and tooling with full control.",
+    "keywords": ["ec2", "instances", "gpu", "compute"]
+  },
+  {
+    "title": "AWS Batch",
+    "slug": "services/aws-batch.html",
+    "summary": "Managed batch processing service that runs containerized workloads on EC2 or Fargate, ideal for queued training and batch inference jobs.",
+    "keywords": ["batch", "jobs", "queue", "training", "inference"]
+  },
+  {
+    "title": "Amazon ECR",
+    "slug": "services/amazon-ecr.html",
+    "summary": "Managed container registry for storing Docker images used by ECS, EKS, Batch, and SageMaker custom training or inference containers.",
+    "keywords": ["ecr", "containers", "registry", "docker"]
+  },
+  {
+    "title": "Amazon ECS",
+    "slug": "services/amazon-ecs.html",
+    "summary": "AWS-native container orchestration service for running Docker containers on EC2 or Fargate, suitable for ML microservices and pipelines.",
+    "keywords": ["ecs", "containers", "orchestration", "services"]
+  },
+  {
+    "title": "Amazon EKS",
+    "slug": "services/amazon-eks.html",
+    "summary": "Managed Kubernetes service enabling Kubernetes-based ML platforms and workloads with GPU nodes and integration to AWS networking and IAM.",
+    "keywords": ["eks", "kubernetes", "containers", "ml platform"]
+  },
+  {
+    "title": "AWS Fargate",
+    "slug": "services/aws-fargate.html",
+    "summary": "Serverless compute engine for containers that runs ECS tasks or EKS pods without managing EC2 instances or clusters.",
+    "keywords": ["fargate", "serverless", "containers", "ecs", "eks"]
+  },
+  {
+    "title": "AWS IoT Greengrass",
+    "slug": "services/aws-iot-greengrass.html",
+    "summary": "Edge runtime and cloud service for building and managing applications on IoT devices, including local ML inference and preprocessing.",
+    "keywords": ["greengrass", "edge", "iot", "inference"]
+  },
+  {
+    "title": "Amazon CloudWatch",
+    "slug": "services/amazon-cloudwatch.html",
+    "summary": "Monitoring and observability service providing metrics, logs, alarms, and dashboards for ML infrastructure and application health.",
+    "keywords": ["cloudwatch", "metrics", "logs", "monitoring"]
+  },
+  {
+    "title": "AWS CloudTrail",
+    "slug": "services/aws-cloudtrail.html",
+    "summary": "Service that records AWS API calls and account activity, used to audit who accessed or changed ML-related resources and data.",
+    "keywords": ["cloudtrail", "audit", "logs", "api history"]
+  },
+  {
+    "title": "Amazon EBS",
+    "slug": "services/amazon-ebs.html",
+    "summary": "Block storage for EC2 instances supporting high-performance volumes and snapshots used for ML training data and artifacts.",
+    "keywords": ["ebs", "block storage", "volumes"]
+  },
+  {
+    "title": "Amazon EFS",
+    "slug": "services/amazon-efs.html",
+    "summary": "Managed elastic NFS file system providing shared POSIX storage for multiple ML compute nodes such as EC2, ECS tasks, or EKS pods.",
+    "keywords": ["efs", "file system", "nfs", "shared storage"]
+  },
+  {
+    "title": "Amazon FSx",
+    "slug": "services/amazon-fsx.html",
+    "summary": "Family of managed file systems; FSx for Lustre is especially used for high-performance shared storage in large ML training clusters.",
+    "keywords": ["fsx", "lustre", "file system", "hpc"]
+  },
+  {
+    "title": "Amazon VPC",
+    "slug": "services/amazon-vpc.html",
+    "summary": "Virtual private cloud networking service defining subnets, routing, and endpoints for isolating and securing ML environments.",
+    "keywords": ["vpc", "networking", "subnets", "endpoints"]
+  },
+  {
+    "title": "AWS IAM",
+    "slug": "services/aws-iam.html",
+    "summary": "Identity and access management service controlling which users and roles can access ML services, data, and infrastructure.",
+    "keywords": ["iam", "access control", "roles", "policies"]
+  },
+  {
+    "title": "Amazon QuickSight",
+    "slug": "services/amazon-quicksight.html",
+    "summary": "Cloud-native BI service with dashboards, embedded analytics, and ML-powered insights for visualizing ML outputs and business metrics.",
+    "keywords": ["quicksight", "bi", "dashboards", "analytics"]
+  }
+]
+

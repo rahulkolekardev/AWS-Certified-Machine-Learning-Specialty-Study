@@ -1,0 +1,29 @@
+@media print {
+  body {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .top-nav,
+  aside.sidebar,
+  footer.site-footer {
+    display: none !important;
+  }
+
+  main.main-content {
+    box-shadow: none;
+    padding: 0;
+  }
+
+  a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+  }
+
+  pre {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #d1d5db;
+  }
+}
+

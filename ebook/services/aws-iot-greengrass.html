@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AWS IoT Greengrass – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Edge &amp; IoT</h2>
+          <ul>
+            <li><a href="aws-iot-greengrass.html">AWS IoT Greengrass</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#edge">Edge &amp; IoT</a> <span aria-hidden="true">›</span>
+          AWS IoT Greengrass
+        </p>
+        <h1>AWS IoT Greengrass</h1>
+        <p>
+          AWS IoT Greengrass is an open-source edge runtime and cloud service for building, deploying, and managing
+          applications on IoT devices. For ML, it enables running inference and data processing close to where data is
+          generated, even with intermittent connectivity.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Local message bus and Lambda function execution on devices.</li>
+            <li>Support for containerized applications and native code.</li>
+            <li>Secure communication with AWS IoT Core and other services.</li>
+            <li>Over-the-air (OTA) deployments and configuration updates.</li>
+            <li>Integration with SageMaker for deploying edge models.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Running ML inference locally on gateways or embedded devices.</li>
+            <li>Preprocessing sensor data before sending aggregated results to the cloud.</li>
+            <li>Supporting offline ML applications that sync periodically.</li>
+            <li>Deploying updated models from SageMaker or other registries to fleets of edge devices.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <p>Greengrass deployments are typically managed via the console, CloudFormation, or the AWS IoT APIs. For full examples, see the official Greengrass documentation and SDKs.</p>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Design models and pipelines to fit the resource constraints of edge devices (memory, CPU, storage).</li>
+            <li>Use secure storage and communication for model binaries and inference data.</li>
+            <li>Plan for graceful degradation when connectivity to AWS is limited.</li>
+            <li>Monitor device health and inference metrics, forwarding summaries to CloudWatch or OpenSearch via IoT.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>Greengrass appears when you need local ML inference or preprocessing at the edge.</li>
+            <li>Look for scenarios describing “intermittent connectivity” or “latency-sensitive edge control loops.”</li>
+            <li>SageMaker + Greengrass is a canonical pattern for edge model deployment.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-aws-iot-greengrass.html">AWS IoT Greengrass V2 – What Is</a></li>
+            <li><a href="https://aws.amazon.com/greengrass/">AWS IoT Greengrass product page</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-aws-iot-greengrass.html">AWS IoT Greengrass V2 Developer Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      AWS IoT Greengrass is the primary way to extend ML workloads from the cloud to edge devices on AWS.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

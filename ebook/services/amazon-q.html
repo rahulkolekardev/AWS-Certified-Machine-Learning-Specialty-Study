@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon Q – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Modeling Platforms</h2>
+          <ul>
+            <li><a href="amazon-sagemaker.html">Amazon SageMaker</a></li>
+            <li><a href="amazon-bedrock.html">Amazon Bedrock</a></li>
+            <li><a href="amazon-q.html">Amazon Q</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#modeling-platforms">Modeling Platforms</a> <span aria-hidden="true">›</span>
+          Amazon Q
+        </p>
+        <h1>Amazon Q</h1>
+        <p>
+          Amazon Q is a family of generative AI–powered assistants that help developers, business users, and cloud
+          practitioners work more efficiently. It provides specialized experiences, such as Q Developer for coding and
+          Q Business for querying organizational data and content.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Q Developer: code generation, debugging help, and cloud troubleshooting assistance.</li>
+            <li>Q Business: semantic search and conversational access to enterprise knowledge bases.</li>
+            <li>Tight integration with AWS services, documentation, and consoles.</li>
+            <li>Enterprise controls for data sources, access policies, and auditability.</li>
+            <li>Powered by foundation models running on AWS (often via Bedrock under the hood).</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Assisting ML engineers and data scientists with code, infrastructure, and design questions.</li>
+            <li>Helping teams discover relevant internal documentation and datasets.</li>
+            <li>Accelerating cloud troubleshooting and optimization tasks for ML workloads.</li>
+            <li>Providing business stakeholders conversational insights based on analytics and BI outputs.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>How it works (high level)</h2>
+          <div class="diagram" role="img" aria-label="Users interact with Amazon Q, which uses foundation models and integrated data sources to answer and assist.">
+            <svg viewBox="0 0 540 130" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="20" width="120" height="40" fill="#dbeafe" stroke="#1d4ed8" />
+              <text x="70" y="45" text-anchor="middle" font-size="11">Developers / analysts</text>
+
+              <rect x="10" y="70" width="120" height="40" fill="#e0f2fe" stroke="#0369a1" />
+              <text x="70" y="95" text-anchor="middle" font-size="11">Business users</text>
+
+              <rect x="160" y="35" width="160" height="60" fill="#fee2e2" stroke="#b91c1c" />
+              <text x="240" y="60" text-anchor="middle" font-size="11">Amazon Q assistants</text>
+
+              <rect x="350" y="20" width="170" height="35" fill="#ecfdf5" stroke="#047857" />
+              <text x="435" y="42" text-anchor="middle" font-size="11">AWS docs / code / metrics</text>
+
+              <rect x="350" y="75" width="170" height="35" fill="#fef9c3" stroke="#a16207" />
+              <text x="435" y="97" text-anchor="middle" font-size="11">Enterprise data sources</text>
+
+              <line x1="130" y1="40" x2="160" y2="55" stroke="#4b5563" marker-end="url(#arrow14)" />
+              <line x1="130" y1="90" x2="160" y2="75" stroke="#4b5563" marker-end="url(#arrow14)" />
+              <line x1="320" y1="50" x2="350" y2="37" stroke="#4b5563" marker-end="url(#arrow14)" />
+              <line x1="320" y1="80" x2="350" y2="92" stroke="#4b5563" marker-end="url(#arrow14)" />
+
+              <defs>
+                <marker id="arrow14" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 z" fill="#4b5563" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <p>Amazon Q is primarily accessed via the AWS Console and integrations rather than a standalone public API.</p>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>On the exam, see Q as a tool that accelerates teams building and operating ML solutions.</li>
+            <li>Configure access controls and data sources carefully to avoid exposing sensitive information.</li>
+            <li>Use Q to surface operational insights (for example, deployments, logs) to non-expert stakeholders.</li>
+            <li>Combine Q with Bedrock-based custom applications when you need bespoke user experiences.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>Amazon Q is not a general-purpose model hosting platform; it is an AI assistant product.</li>
+            <li>For building your own generative apps, Bedrock or SageMaker is more appropriate.</li>
+            <li>Look for questions about assisting developers or business users rather than hosting models.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/amazonq/latest/userguide/what-is.html">Amazon Q User Guide – What Is Amazon Q?</a></li>
+            <li><a href="https://aws.amazon.com/amazonq/">Amazon Q product page</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/amazonq/latest/userguide/what-is.html">Amazon Q User Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Amazon Q surfaces generative AI assistants to help people build, operate, and understand AWS-powered systems, including ML solutions.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

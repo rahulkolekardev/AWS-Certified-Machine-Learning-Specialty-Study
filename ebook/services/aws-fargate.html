@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AWS Fargate – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Compute &amp; Containers</h2>
+          <ul>
+            <li><a href="amazon-ec2.html">Amazon EC2</a></li>
+            <li><a href="aws-batch.html">AWS Batch</a></li>
+            <li><a href="amazon-ecr.html">Amazon ECR</a></li>
+            <li><a href="amazon-ecs.html">Amazon ECS</a></li>
+            <li><a href="amazon-eks.html">Amazon EKS</a></li>
+            <li><a href="aws-fargate.html">AWS Fargate</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#compute">Compute &amp; Orchestration</a> <span aria-hidden="true">›</span>
+          AWS Fargate
+        </p>
+        <h1>AWS Fargate</h1>
+        <p>
+          AWS Fargate is a serverless compute engine for containers that works with ECS and EKS. It lets you run
+          containers without managing servers or clusters, paying only for the vCPU and memory resources used.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>No need to provision or manage EC2 instances for containers.</li>
+            <li>Task-level isolation and automatic scaling.</li>
+            <li>Works with ECS tasks and EKS pods (Fargate profiles).</li>
+            <li>Integrated with VPC networking, IAM, and CloudWatch.</li>
+            <li>Suitable for many CPU-bound inference and microservice workloads.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Running lightweight inference services or ML-powered microservices.</li>
+            <li>Hosting auxiliary services (feature APIs, web frontends, schedulers) in ML architectures.</li>
+            <li>Prototyping containerized ML workloads without managing node fleets.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <p>Fargate is configured through ECS or EKS; see their pages for examples. You select the Fargate launch type or Fargate profiles when defining tasks or pods.</p>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Use Fargate for CPU-bound microservices; GPU workloads generally require EC2-based nodes.</li>
+            <li>Right-size vCPU and memory; overprovisioning directly impacts cost.</li>
+            <li>Forward logs to CloudWatch and use autoscaling policies based on utilization.</li>
+            <li>Use private subnets and security groups for network isolation.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>Fargate is “serverless containers,” often paired with ECS or EKS in exam diagrams.</li>
+            <li>Use Fargate when you explicitly want to avoid managing EC2 clusters for containers.</li>
+            <li>For GPU or very specialized node configurations, EC2-based containers remain necessary.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html">AWS Fargate with ECS – documentation</a></li>
+            <li><a href="https://aws.amazon.com/fargate/">AWS Fargate product page</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html">AWS Fargate documentation</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      AWS Fargate makes it easy to run containerized ML microservices without managing servers.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+
