@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon VPC – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Security &amp; Networking</h2>
+          <ul>
+            <li><a href="amazon-vpc.html">Amazon VPC</a></li>
+            <li><a href="aws-iam.html">AWS IAM</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#security-networking">Security &amp; Networking</a> <span aria-hidden="true">›</span>
+          Amazon VPC
+        </p>
+        <h1>Amazon Virtual Private Cloud (VPC)</h1>
+        <p>
+          Amazon VPC lets you provision logically isolated virtual networks in AWS. For ML workloads, VPCs provide
+          network isolation, control over routing, and private connectivity between data stores, compute resources, and
+          managed ML services.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Subnets, route tables, internet and NAT gateways.</li>
+            <li>Security groups and network ACLs for traffic control.</li>
+            <li>VPC endpoints for private connectivity to AWS services.</li>
+            <li>Peering, Transit Gateway, and VPN/Direct Connect for hybrid architectures.</li>
+            <li>Flow logs for network traffic visibility.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Isolating training and inference environments in private subnets.</li>
+            <li>Providing private access to S3, Bedrock, SageMaker, and other services via VPC endpoints.</li>
+            <li>Connecting on-premises data centers to AWS-based ML stacks.</li>
+            <li>Implementing network segmentation between dev, test, and production ML environments.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>CLI examples</h2>
+          <h3>Create a VPC (CLI)</h3>
+          <pre><code class="language-bash">aws ec2 create-vpc --cidr-block 10.0.0.0/16</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Place ML endpoints and training instances in private subnets; use load balancers or endpoints for access.</li>
+            <li>Use interface VPC endpoints to keep traffic to AWS APIs (including S3 and SageMaker) inside the AWS network.</li>
+            <li>Segment networks by environment and sensitivity level, especially for regulated workloads.</li>
+            <li>Monitor VPC Flow Logs and enforce least-privilege network access via security groups.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>VPC is central to questions about private ML endpoints, data exfiltration controls, and hybrid connectivity.</li>
+            <li>VPC endpoints are key for private S3 and Bedrock/SageMaker access from private subnets.</li>
+            <li>Remember that security groups are stateful, while network ACLs are stateless.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC User Guide – What Is a VPC?</a></li>
+            <li><a href="https://aws.amazon.com/vpc/">Amazon VPC product page</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC User Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Amazon VPC underpins network isolation and private connectivity for secure ML architectures on AWS.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

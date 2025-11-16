@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AWS ML Specialty Ebook – Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="index.html" data-page="index.html">Home</a>
+          <a href="toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="search.html" data-page="search.html">Search</a>
+          <a href="about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Quick navigation">
+        <section class="sidebar-section">
+          <h2>Quick Links</h2>
+          <ul>
+            <li><a href="toc.html">All services by pipeline stage</a></li>
+            <li><a href="cheat-sheet.html">Exam-day cheat sheet</a></li>
+            <li><a href="practice-questions.html">Practice questions</a></li>
+            <li><a href="glossary.html">Glossary</a></li>
+            <li><a href="search.html">Search the ebook</a></li>
+          </ul>
+        </section>
+        <section class="sidebar-section">
+          <h3>Core Services</h3>
+          <ul>
+            <li><a href="services/amazon-sagemaker.html">Amazon SageMaker</a></li>
+            <li><a href="services/amazon-s3.html">Amazon S3</a></li>
+            <li><a href="services/amazon-redshift.html">Amazon Redshift</a></li>
+            <li><a href="services/amazon-bedrock.html">Amazon Bedrock</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <header>
+          <p class="breadcrumbs"><a href="index.html">Home</a> <span aria-hidden="true">›</span> Overview</p>
+          <h1>AWS Certified Machine Learning – Specialty Ebook</h1>
+          <p>
+            This offline ebook summarizes key AWS AI/ML services, data platforms, and supporting infrastructure
+            for the AWS Certified Machine Learning – Specialty exam.
+          </p>
+        </header>
+        <section>
+          <h2>How to use this ebook for the exam</h2>
+          <ul>
+            <li>
+              Start with the <a href="toc.html">Table of Contents</a> and skim each service page once, focusing on
+              use cases, integration points, and exam tips.
+            </li>
+            <li>
+              Use the <a href="cheat-sheet.html">Cheat Sheet</a> to compare similar services (for example Kinesis vs.
+              Firehose vs. Managed Flink, or SageMaker vs. EC2).
+            </li>
+            <li>
+              Work through the <a href="practice-questions.html">practice questions</a> to identify gaps, then jump
+              back into the relevant service pages.
+            </li>
+            <li>
+              Keep the <a href="glossary.html">glossary</a> handy for clarifying terminology in exam scenarios.
+            </li>
+            <li>
+              When in doubt, follow the official docs links on each page and read the “What is X?” and “Best practices”
+              sections for deeper context.
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Service coverage</h2>
+          <p>
+            The ebook covers data ingestion, storage and ETL, analytics, ML platforms, prebuilt AI services, compute,
+            edge, monitoring, security, and BI tooling that commonly appear in the exam. Each service page includes:
+          </p>
+          <ul>
+            <li>Elevator summary and key features.</li>
+            <li>Typical ML pipeline use cases and integration points.</li>
+            <li>High-level architecture diagrams tailored to ML workloads.</li>
+            <li>Short AWS CLI and Python (boto3) examples.</li>
+            <li>Best practices for performance, reliability, and cost.</li>
+            <li>Exam tips and links to official AWS documentation and blogs.</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Exam domains alignment</h2>
+          <div class="table-responsive">
+            <table aria-label="Exam domains alignment">
+              <thead>
+                <tr>
+                  <th>Domain</th>
+                  <th>Weight</th>
+                  <th>Relevant pages</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Data Engineering</td>
+                  <td>~20%</td>
+                  <td>S3, Glue, Lake Formation, EMR, Athena, Redshift, OpenSearch, Kinesis family</td>
+                </tr>
+                <tr>
+                  <td>Exploratory Data Analysis</td>
+                  <td>~24%</td>
+                  <td>Athena, EMR, SageMaker, QuickSight, OpenSearch</td>
+                </tr>
+                <tr>
+                  <td>Modeling</td>
+                  <td>~36%</td>
+                  <td>SageMaker, Bedrock, EC2, Batch, container services, prebuilt AI APIs</td>
+                </tr>
+                <tr>
+                  <td>ML Operations</td>
+                  <td>~20%</td>
+                  <td>CloudWatch, CloudTrail, IAM, VPC, storage services, deployment and CI/CD patterns</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="callout">
+          <h2>About sources</h2>
+          <p>
+            Content in this ebook is paraphrased and summarized from official AWS documentation, AWS blogs, and
+            re:Invent talks. Each service page links directly to its canonical docs. Due to the offline build
+            environment, the summaries are based on the latest AWS documentation available to the model at
+            training time rather than a live crawl.
+          </p>
+        </section>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Compiled study notes for the AWS Certified Machine Learning – Specialty exam. Always verify details against the
+      latest AWS documentation.
+    </footer>
+    <script src="scripts/prism.js"></script>
+    <script src="scripts/main.js"></script>
+  </body>
+</html>
+

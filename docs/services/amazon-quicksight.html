@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon QuickSight – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Business Intelligence</h2>
+          <ul>
+            <li><a href="amazon-quicksight.html">Amazon QuickSight</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#bi">Business Intelligence</a> <span aria-hidden="true">›</span>
+          Amazon QuickSight
+        </p>
+        <h1>Amazon QuickSight</h1>
+        <p>
+          Amazon QuickSight is a cloud-native business intelligence service that provides interactive dashboards,
+          reporting, and embedded analytics. It includes ML-powered features for anomaly detection, forecasting, and
+          natural language queries (Q in QuickSight).
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>SPICE in-memory engine for fast, scalable analytics.</li>
+            <li>Dashboards, reports, and embedded visualizations.</li>
+            <li>ML Insights for anomaly detection and forecasting.</li>
+            <li>QuickSight Q for natural language querying of data.</li>
+            <li>Integration with Redshift, Athena, RDS, and many other sources.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Visualizing input data distributions and model outputs for stakeholders.</li>
+            <li>Building dashboards that track key metrics influenced by ML models (for example, churn, conversion).</li>
+            <li>Providing self-service analytics to business users alongside ML predictions.</li>
+            <li>Using ML-powered insights for basic anomaly detection and forecasts without building custom models.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <p>QuickSight is primarily managed through the console and APIs for administration and embedding; command-line usage is less common. See the QuickSight API Reference for full examples.</p>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Feed QuickSight with curated, well-modeled data from Redshift, Athena tables, or other governed sources.</li>
+            <li>Expose model outputs (scores, labels, explanations) in datasets for dashboarding and monitoring.</li>
+            <li>Use row-level security to restrict which data different user groups can see.</li>
+            <li>Be clear about the capabilities and limitations of built-in ML Insights vs. custom models.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>QuickSight is the primary BI/visualization service, not a modeling platform.</li>
+            <li>Look for requirements related to dashboards, data exploration for business users, or embedded analytics.</li>
+            <li>QuickSight Q (inside QuickSight) is different from Amazon Q assistants, though both use ML.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/quicksight/latest/user/welcome.html">Amazon QuickSight User Guide – Welcome</a></li>
+            <li><a href="https://aws.amazon.com/quicksight/">Amazon QuickSight product page</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/quicksight/latest/user/welcome.html">Amazon QuickSight User Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Amazon QuickSight connects ML outputs to decision makers via dashboards and ML-powered insights.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

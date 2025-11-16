@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon Textract – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Prebuilt AI APIs</h2>
+          <ul>
+            <li><a href="amazon-comprehend.html">Amazon Comprehend</a></li>
+            <li><a href="amazon-rekognition.html">Amazon Rekognition</a></li>
+            <li><a href="amazon-transcribe.html">Amazon Transcribe</a></li>
+            <li><a href="amazon-polly.html">Amazon Polly</a></li>
+            <li><a href="amazon-translate.html">Amazon Translate</a></li>
+            <li><a href="amazon-textract.html">Amazon Textract</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#prebuilt-apis">Prebuilt AI APIs</a> <span aria-hidden="true">›</span>
+          Amazon Textract
+        </p>
+        <h1>Amazon Textract</h1>
+        <p>
+          Amazon Textract is a document analysis service that uses machine learning to extract text, forms, tables, and
+          key-value pairs from scanned documents. It goes beyond traditional OCR by understanding structure and
+          relationships in documents.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Extraction of text, forms, and tables from images and PDFs.</li>
+            <li>Key-value pair detection to identify field names and values.</li>
+            <li>Queries feature for asking targeted questions of documents (for example, “Total due”).</li>
+            <li>Support for asynchronous batch processing via S3.</li>
+            <li>Integration with Comprehend for downstream NLP on extracted text.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Digitizing paper-based workflows such as invoices, forms, and statements.</li>
+            <li>Extracting structured data for downstream analytics and ML models.</li>
+            <li>Creating labeled datasets for document understanding tasks.</li>
+            <li>Feeding extracted fields into fraud detection or risk scoring models.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>How it works (high level)</h2>
+          <div class="diagram" role="img" aria-label="Documents in S3 are analyzed by Textract, which outputs structured text, forms, and tables.">
+            <svg viewBox="0 0 540 130" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="45" width="120" height="40" fill="#dbeafe" stroke="#1d4ed8" />
+              <text x="70" y="70" text-anchor="middle" font-size="11">Scanned docs (S3)</text>
+
+              <rect x="160" y="30" width="160" height="70" fill="#fee2e2" stroke="#b91c1c" />
+              <text x="240" y="55" text-anchor="middle" font-size="11">Amazon Textract</text>
+              <text x="240" y="73" text-anchor="middle" font-size="10">text, forms, tables</text>
+
+              <rect x="350" y="20" width="170" height="35" fill="#ecfdf5" stroke="#047857" />
+              <text x="435" y="42" text-anchor="middle" font-size="11">Structured outputs (JSON)</text>
+
+              <rect x="350" y="75" width="170" height="35" fill="#fef9c3" stroke="#a16207" />
+              <text x="435" y="97" text-anchor="middle" font-size="11">Analytics / ML models</text>
+
+              <line x1="130" y1="65" x2="160" y2="65" stroke="#4b5563" marker-end="url(#arrow20)" />
+              <line x1="320" y1="50" x2="350" y2="37" stroke="#4b5563" marker-end="url(#arrow20)" />
+              <line x1="320" y1="80" x2="350" y2="92" stroke="#4b5563" marker-end="url(#arrow20)" />
+
+              <defs>
+                <marker id="arrow20" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 z" fill="#4b5563" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <h3>Detect document text (CLI)</h3>
+          <pre><code class="language-bash">aws textract detect-document-text \
+  --document \"S3Object={Bucket=ml-docs,Name=invoice.pdf}\"</code></pre>
+
+          <h3>Analyze document (Python, boto3)</h3>
+          <pre><code class="language-python">import boto3
+
+textract = boto3.client("textract")
+
+resp = textract.analyze_document(
+    Document={"S3Object": {"Bucket": "ml-docs", "Name": "form.png"}},
+    FeatureTypes=["FORMS", "TABLES"],
+)
+for block in resp["Blocks"]:
+    if block["BlockType"] == "KEY_VALUE_SET":
+        print(block.get("Text", ""))</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Use high-resolution scans and appropriate formats (for example, 300 DPI) for best accuracy.</li>
+            <li>For large document sets, use asynchronous APIs and process results from S3.</li>
+            <li>Normalize and validate extracted fields before using them as ML features.</li>
+            <li>Combine Textract with Comprehend for deeper semantic understanding of extracted text.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>Textract is for document text, forms, and tables; Rekognition is for general images and scenes.</li>
+            <li>Look for keywords like “scanned PDFs,” “forms,” “table extraction,” or “key-value pairs.”</li>
+            <li>Textract plus Comprehend is a common pattern for end-to-end document understanding.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/textract/latest/dg/what-is.html">Amazon Textract Developer Guide – What Is</a></li>
+            <li><a href="https://aws.amazon.com/textract/">Amazon Textract product page</a></li>
+            <li><a href="https://aws.amazon.com/blogs/machine-learning/category/artificial-intelligence/amazon-textract/">AWS ML Blog – Textract</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/textract/latest/dg/what-is.html">Amazon Textract Developer Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Amazon Textract turns unstructured documents into structured data ready for analytics and ML models.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

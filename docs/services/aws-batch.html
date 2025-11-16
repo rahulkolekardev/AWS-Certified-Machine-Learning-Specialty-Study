@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AWS Batch – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Compute &amp; Orchestration</h2>
+          <ul>
+            <li><a href="amazon-ec2.html">Amazon EC2</a></li>
+            <li><a href="aws-batch.html">AWS Batch</a></li>
+            <li><a href="amazon-ecr.html">Amazon ECR</a></li>
+            <li><a href="amazon-ecs.html">Amazon ECS</a></li>
+            <li><a href="amazon-eks.html">Amazon EKS</a></li>
+            <li><a href="aws-fargate.html">AWS Fargate</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#compute">Compute &amp; Orchestration</a> <span aria-hidden="true">›</span>
+          AWS Batch
+        </p>
+        <h1>AWS Batch</h1>
+        <p>
+          AWS Batch is a fully managed batch processing service that schedules and runs containerized workloads across
+          EC2 and Fargate. It is well-suited for large-scale, parallel ML training and batch inference jobs where
+          workloads are queued and processed asynchronously.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Job queues and compute environments that scale based on demand.</li>
+            <li>Support for EC2 (including Spot) and Fargate as underlying compute.</li>
+            <li>Docker-based jobs with integration to Amazon ECR and other registries.</li>
+            <li>Array jobs and multi-node parallel jobs for large-scale workloads.</li>
+            <li>Event-driven launches and integration with Step Functions and other services.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Running distributed training jobs that can be expressed as containers.</li>
+            <li>Performing large-scale batch inference over datasets stored in S3 or Redshift.</li>
+            <li>Executing offline evaluation, hyperparameter sweeps, or simulation-based experiments.</li>
+            <li>Handling sporadic, compute-heavy tasks without keeping clusters running continuously.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>How it works (high level)</h2>
+          <div class="diagram" role="img" aria-label="Jobs are submitted to AWS Batch job queues, which dispatch them to compute environments on EC2 or Fargate.">
+            <svg viewBox="0 0 540 130" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="45" width="120" height="40" fill="#dbeafe" stroke="#1d4ed8" />
+              <text x="70" y="70" text-anchor="middle" font-size="11">Job submitters</text>
+
+              <rect x="160" y="30" width="150" height="70" fill="#fee2e2" stroke="#b91c1c" />
+              <text x="235" y="55" text-anchor="middle" font-size="11">AWS Batch</text>
+              <text x="235" y="73" text-anchor="middle" font-size="10">queues &amp; scheduling</text>
+
+              <rect x="340" y="20" width="180" height="35" fill="#ecfdf5" stroke="#047857" />
+              <text x="430" y="42" text-anchor="middle" font-size="11">EC2 / Spot compute env</text>
+
+              <rect x="340" y="75" width="180" height="35" fill="#fef9c3" stroke="#a16207" />
+              <text x="430" y="97" text-anchor="middle" font-size="11">Fargate compute env</text>
+
+              <line x1="130" y1="65" x2="160" y2="65" stroke="#4b5563" marker-end="url(#arrow22)" />
+              <line x1="310" y1="50" x2="340" y2="37" stroke="#4b5563" marker-end="url(#arrow22)" />
+              <line x1="310" y1="80" x2="340" y2="92" stroke="#4b5563" marker-end="url(#arrow22)" />
+
+              <defs>
+                <marker id="arrow22" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 z" fill="#4b5563" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <h3>Submit a job (CLI)</h3>
+          <pre><code class="language-bash">aws batch submit-job \
+  --job-name ml-batch-inference \
+  --job-queue ml-job-queue \
+  --job-definition ml-job-def</code></pre>
+
+          <h3>Submit a job (Python, boto3)</h3>
+          <pre><code class="language-python">import boto3
+
+batch = boto3.client("batch")
+
+resp = batch.submit_job(
+    jobName="ml-batch-inference",
+    jobQueue="ml-job-queue",
+    jobDefinition="ml-job-def",
+    containerOverrides={"environment": [{"name": "BATCH_SIZE", "value": "256"}]},
+)
+print(resp["jobId"])</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Use Spot Instances in compute environments for cost-effective training and inference jobs.</li>
+            <li>Design jobs to be idempotent and resilient to retries and interruptions.</li>
+            <li>Use array jobs for parameter sweeps or when running the same container with different inputs.</li>
+            <li>Keep container images small and immutable to speed up scheduling.</li>
+            <li>Monitor queue depth and job status with CloudWatch and CloudTrail for operational visibility.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>AWS Batch is the go-to for large-scale, queued, containerized ML workloads.</li>
+            <li>Look for “batch inference,” “offline processing,” or “queue-based training” cues.</li>
+            <li>Contrast with SageMaker training: Batch provides more generic container orchestration but less ML-specific tooling.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/batch/latest/userguide/what-is-batch.html">AWS Batch User Guide – What Is AWS Batch?</a></li>
+            <li><a href="https://aws.amazon.com/batch/">AWS Batch product page</a></li>
+            <li><a href="https://aws.amazon.com/blogs/machine-learning/category/compute/aws-batch/">AWS ML Blog – Batch</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/batch/latest/userguide/what-is-batch.html">AWS Batch User Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      AWS Batch is ideal for large-scale, containerized training and batch inference workloads driven by queues.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AWS ML Specialty Ebook – Cheat Sheet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="index.html" data-page="index.html">Home</a>
+          <a href="toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="search.html" data-page="search.html">Search</a>
+          <a href="about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Cheat sheet navigation">
+        <section class="sidebar-section">
+          <h2>Categories</h2>
+          <ul>
+            <li><a href="#ingestion">Ingestion</a></li>
+            <li><a href="#storage">Storage &amp; ETL</a></li>
+            <li><a href="#analytics">Analytics</a></li>
+            <li><a href="#modeling">Modeling</a></li>
+            <li><a href="#prebuilt">Prebuilt APIs</a></li>
+            <li><a href="#compute">Compute</a></li>
+            <li><a href="#ops">Ops &amp; Security</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs"><a href="index.html">Home</a> <span aria-hidden="true">›</span> Cheat Sheet</p>
+        <h1>Exam-day cheat sheet</h1>
+
+        <section id="ingestion">
+          <h2>Ingestion</h2>
+          <ul>
+            <li>Streaming ingestion: <strong>Kinesis Data Streams</strong> (custom consumers, replay, low-latency).</li>
+            <li>Simple delivery into S3/Redshift/OpenSearch: <strong>Kinesis Data Firehose</strong> (managed, near real time).</li>
+            <li>Real-time stream processing: <strong>Managed Service for Apache Flink</strong> (stateful apps with Flink).</li>
+          </ul>
+        </section>
+
+        <section id="storage">
+          <h2>Storage &amp; ETL</h2>
+          <ul>
+            <li>Durable data lake storage: <strong>Amazon S3</strong> (versioning, lifecycle, storage classes).</li>
+            <li>Serverless ETL and catalog: <strong>AWS Glue</strong> (jobs, crawlers, Data Catalog).</li>
+            <li>Governed lake permissions: <strong>AWS Lake Formation</strong> (fine-grained access on lake tables).</li>
+          </ul>
+        </section>
+
+        <section id="analytics">
+          <h2>Analytics &amp; Query</h2>
+          <ul>
+            <li>Serverless SQL on S3: <strong>Amazon Athena</strong> (pay per query, integrates with Glue catalog).</li>
+            <li>Managed big data clusters: <strong>Amazon EMR</strong> (Spark, Hive, Presto, HBase).</li>
+            <li>Cloud data warehouse: <strong>Amazon Redshift</strong> (columnar MPP, Spectrum for S3).</li>
+            <li>Search &amp; log analytics: <strong>Amazon OpenSearch Service</strong>.</li>
+          </ul>
+        </section>
+
+        <section id="modeling">
+          <h2>Modeling platforms</h2>
+          <ul>
+            <li>End-to-end ML platform: <strong>Amazon SageMaker</strong> (studio, training, deployment, pipelines, feature store).</li>
+            <li>Generative AI foundation models: <strong>Amazon Bedrock</strong> (multi-model API, guardrails, agents).</li>
+            <li>AI assistants for builders: <strong>Amazon Q</strong> (code, business, and cloud assistants).</li>
+            <li>Ad-hoc training/inference: <strong>EC2</strong> or <strong>Batch</strong> (more control, more ops).</li>
+          </ul>
+        </section>
+
+        <section id="prebuilt">
+          <h2>Prebuilt AI APIs</h2>
+          <ul>
+            <li>NLP: <strong>Comprehend</strong> (classification, entities, key phrases, custom models).</li>
+            <li>Vision: <strong>Rekognition</strong> (labels, moderation, faces, text-in-image).</li>
+            <li>Speech to text: <strong>Transcribe</strong> (batch/streaming, custom vocabulary).</li>
+            <li>Text to speech: <strong>Polly</strong> (voices, neural TTS).</li>
+            <li>Translation: <strong>Translate</strong> (custom terminology, batch APIs).</li>
+            <li>Document understanding: <strong>Textract</strong> (forms, tables, queries).</li>
+          </ul>
+        </section>
+
+        <section id="compute">
+          <h2>Compute &amp; orchestration</h2>
+          <ul>
+            <li>Flexible VMs: <strong>EC2</strong> (GPU instances for training/inference).</li>
+            <li>Queue-based batch jobs: <strong>AWS Batch</strong> (spot integration, array jobs).</li>
+            <li>Containers registry: <strong>Amazon ECR</strong>.</li>
+            <li>Orchestration: <strong>ECS</strong> / <strong>EKS</strong>, with <strong>Fargate</strong> for serverless containers.</li>
+            <li>Edge ML: <strong>AWS IoT Greengrass</strong> for local inference and messaging.</li>
+          </ul>
+        </section>
+
+        <section id="ops">
+          <h2>Operations, security, and monitoring</h2>
+          <ul>
+            <li>Metrics and logs: <strong>CloudWatch</strong> (dashboards, alarms, logs).</li>
+            <li>Audit trails: <strong>CloudTrail</strong> (API history per account and region).</li>
+            <li>Network isolation: <strong>VPC</strong> (subnets, routing, endpoints for private S3/Bedrock/SageMaker).</li>
+            <li>Access control: <strong>IAM</strong> (fine-grained policies, roles, federation).</li>
+            <li>Visualization &amp; dashboards: <strong>QuickSight</strong> (SPICE in-memory engine, ML insights).</li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: Aggregated from official AWS service documentation and exam guides. Last consolidated: 2025-11-16.
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Use this page as a last-minute refresher; see individual service pages for details and examples.
+    </footer>
+    <script src="scripts/prism.js"></script>
+    <script src="scripts/main.js"></script>
+  </body>
+</html>
+

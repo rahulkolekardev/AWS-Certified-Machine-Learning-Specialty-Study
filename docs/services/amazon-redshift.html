@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon Redshift – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Analytics &amp; Warehousing</h2>
+          <ul>
+            <li><a href="amazon-emr.html">Amazon EMR</a></li>
+            <li><a href="amazon-athena.html">Amazon Athena</a></li>
+            <li><a href="amazon-redshift.html">Amazon Redshift</a></li>
+            <li><a href="amazon-opensearch-service.html">Amazon OpenSearch Service</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#analytics">Analytics</a> <span aria-hidden="true">›</span>
+          Amazon Redshift
+        </p>
+        <h1>Amazon Redshift</h1>
+        <p>
+          Amazon Redshift is a fully managed, petabyte-scale cloud data warehouse. For ML, it is used to store and query
+          structured data, compute aggregates and features, and serve as the analytics layer feeding both BI tools and
+          downstream ML pipelines.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Columnar storage and massively parallel processing for high-performance SQL analytics.</li>
+            <li>RA3 nodes and Redshift Serverless options for flexible scaling and pricing.</li>
+            <li>Redshift Spectrum for querying data in S3 without loading.</li>
+            <li>Integration with COPY and UNLOAD operations for data movement.</li>
+            <li>Built-in ML capabilities (Redshift ML) for training models using SQL with SageMaker under the hood.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Storing curated, relational datasets used for analytics and feature engineering.</li>
+            <li>Computing aggregates, cohorts, and KPIs used as features for models.</li>
+            <li>Running Redshift ML to train simple models directly from SQL.</li>
+            <li>Serving as a high-performance source for feature extraction into SageMaker training jobs.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>How it works (high level)</h2>
+          <div class="diagram" role="img" aria-label="Redshift cluster or serverless reads data from S3 and internal tables and serves queries and ML outputs.">
+            <svg viewBox="0 0 540 130" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="45" width="110" height="40" fill="#ecfdf5" stroke="#047857" />
+              <text x="65" y="70" text-anchor="middle" font-size="11">S3 / ETL outputs</text>
+
+              <rect x="150" y="30" width="150" height="70" fill="#fee2e2" stroke="#b91c1c" />
+              <text x="225" y="60" text-anchor="middle" font-size="11">Redshift cluster / serverless</text>
+
+              <rect x="330" y="20" width="190" height="30" fill="#e0f2fe" stroke="#0369a1" />
+              <text x="425" y="40" text-anchor="middle" font-size="11">BI tools / dashboards</text>
+
+              <rect x="330" y="75" width="190" height="30" fill="#fef9c3" stroke="#a16207" />
+              <text x="425" y="95" text-anchor="middle" font-size="11">SageMaker / ML pipelines</text>
+
+              <line x1="120" y1="65" x2="150" y2="65" stroke="#4b5563" marker-end="url(#arrow9)" />
+              <line x1="300" y1="55" x2="330" y2="35" stroke="#4b5563" marker-end="url(#arrow9)" />
+              <line x1="300" y1="75" x2="330" y2="90" stroke="#4b5563" marker-end="url(#arrow9)" />
+
+              <defs>
+                <marker id="arrow9" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 z" fill="#4b5563" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <h3>Create a Redshift Serverless namespace (CLI)</h3>
+          <pre><code class="language-bash">aws redshift-serverless create-namespace \
+  --namespace-name ml-analytics</code></pre>
+
+          <h3>Run a query (Python, boto3)</h3>
+          <pre><code class="language-python">import boto3
+
+redshift_data = boto3.client("redshift-data")
+
+resp = redshift_data.execute_statement(
+    WorkgroupName="ml-workgroup",
+    Database="ml_db",
+    Sql="SELECT label, COUNT(*) FROM churn_events GROUP BY label",
+)
+print("Statement ID:", resp["Id"])</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Use RA3 or serverless with Redshift Spectrum to keep cold data in S3 and hot data in Redshift tables.</li>
+            <li>Design schemas with sort and distribution keys that match query patterns.</li>
+            <li>Use UNLOAD to export large training datasets to S3 in Parquet for SageMaker.</li>
+            <li>Consider Redshift ML for simple models but use SageMaker for complex or large-scale training.</li>
+            <li>Secure access with IAM, VPC, and encryption, especially for regulated analytics.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>Redshift is the exam’s main data warehouse; Athena is serverless query on S3.</li>
+            <li>Redshift ML highlights integration with SageMaker for in-database model training.</li>
+            <li>RA3 + Spectrum is the key phrase for separating storage and compute.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/redshift/latest/mgmt/welcome.html">Amazon Redshift Cluster Management Guide – Welcome</a></li>
+            <li><a href="https://aws.amazon.com/redshift/">Amazon Redshift product page</a></li>
+            <li><a href="https://docs.aws.amazon.com/redshift/latest/dg/c_redshift-ml.html">Redshift ML documentation</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/welcome.html">Amazon Redshift documentation</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Amazon Redshift is the core data warehouse for large-scale analytics and some in-database ML on AWS.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

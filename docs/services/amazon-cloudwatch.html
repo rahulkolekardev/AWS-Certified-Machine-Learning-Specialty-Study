@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon CloudWatch – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Monitoring &amp; Governance</h2>
+          <ul>
+            <li><a href="amazon-cloudwatch.html">Amazon CloudWatch</a></li>
+            <li><a href="aws-cloudtrail.html">AWS CloudTrail</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#monitoring">Monitoring &amp; Governance</a> <span aria-hidden="true">›</span>
+          Amazon CloudWatch
+        </p>
+        <h1>Amazon CloudWatch</h1>
+        <p>
+          Amazon CloudWatch is a monitoring and observability service that collects metrics, logs, and events from AWS
+          resources and applications. For ML, it is used to monitor training jobs, endpoints, pipelines, and underlying
+          infrastructure.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Metrics, logs, and alarms for AWS services and custom applications.</li>
+            <li>Dashboards for real-time visualization of metrics.</li>
+            <li>Log Insights for querying and analyzing log data.</li>
+            <li>Events and rules for responding to state changes.</li>
+            <li>ServiceLens and cross-service tracing (with X-Ray) for deeper visibility.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Tracking training job resource usage, errors, and completion metrics.</li>
+            <li>Monitoring inference latency, error rates, and throughput for endpoints.</li>
+            <li>Setting alarms on key business or model quality metrics emitted as custom metrics.</li>
+            <li>Capturing logs from SageMaker, Bedrock, ECS/EKS, and Batch jobs.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <h3>Put a custom metric (CLI)</h3>
+          <pre><code class="language-bash">aws cloudwatch put-metric-data \
+  --namespace MLApp \
+  --metric-data 'MetricName=Latency,Value=45,Unit=Milliseconds'</code></pre>
+
+          <h3>Get metrics (Python, boto3)</h3>
+          <pre><code class="language-python">import boto3
+
+cw = boto3.client("cloudwatch")
+
+resp = cw.list_metrics(Namespace="AWS/SageMaker")
+for m in resp.get("Metrics", [])[:5]:
+    print(m["MetricName"], m.get("Dimensions", []))</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Emit domain-specific metrics (for example, prediction error rate) in addition to infrastructure metrics.</li>
+            <li>Use dashboards to give product and operations teams a shared view of model health.</li>
+            <li>Configure alarms with sensible thresholds and notification channels (SNS, Slack, etc.).</li>
+            <li>Leverage log retention policies and metric filters to manage costs and focus on important signals.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>CloudWatch is for monitoring and alerting; CloudTrail is for auditing API activity.</li>
+            <li>Exam questions about latency, errors, and autoscaling almost always involve CloudWatch metrics and alarms.</li>
+            <li>Remember that many ML services automatically publish metrics and logs to CloudWatch.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html">Amazon CloudWatch User Guide – What Is</a></li>
+            <li><a href="https://aws.amazon.com/cloudwatch/">Amazon CloudWatch product page</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html">Amazon CloudWatch User Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      CloudWatch is the primary service for monitoring ML infrastructure and exposing model health metrics on AWS.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

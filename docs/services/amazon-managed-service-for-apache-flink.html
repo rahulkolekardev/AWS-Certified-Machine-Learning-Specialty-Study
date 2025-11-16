@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon Managed Service for Apache Flink – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Data Ingestion &amp; Stream Processing</h2>
+          <ul>
+            <li><a href="amazon-kinesis-data-streams.html">Kinesis Data Streams</a></li>
+            <li><a href="amazon-kinesis-data-firehose.html">Kinesis Data Firehose</a></li>
+            <li><a href="amazon-managed-service-for-apache-flink.html">Managed Service for Apache Flink</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#data-ingestion">Data Ingestion</a> <span aria-hidden="true">›</span>
+          Amazon Managed Service for Apache Flink
+        </p>
+        <h1>Amazon Managed Service for Apache Flink</h1>
+        <p>
+          Amazon Managed Service for Apache Flink (formerly Kinesis Data Analytics for Apache Flink) is a fully managed
+          service for building and running Apache Flink applications on streaming data. It lets you perform complex,
+          stateful stream processing using Java, Scala, or SQL without managing Flink clusters.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Managed Apache Flink runtime with automatic scaling and patching.</li>
+            <li>Native integration with Kinesis Data Streams, Managed Kafka, and other streaming sources.</li>
+            <li>Support for event time processing, windows, and exactly-once semantics for many sinks.</li>
+            <li>Checkpoints and savepoints for fault tolerance and application upgrades.</li>
+            <li>Integration with S3, Redshift, Elasticsearch/OpenSearch Service, and custom sinks.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Real-time feature engineering, such as aggregations over sliding windows for personalization or fraud models.</li>
+            <li>Streaming ETL pipelines that clean and enrich data before writing to S3 or data warehouses.</li>
+            <li>Online inference pipelines consuming events and invoking ML endpoints per record.</li>
+            <li>Continuous computation of monitoring metrics (for example, prediction drift) over event streams.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>How it works (high level)</h2>
+          <div class="diagram" role="img" aria-label="Streaming sources feed a managed Flink application, which writes enriched data and metrics to S3 and ML services.">
+            <svg viewBox="0 0 540 130" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="20" width="110" height="35" fill="#dbeafe" stroke="#1d4ed8" />
+              <text x="65" y="42" text-anchor="middle" font-size="11">KDS / Kafka</text>
+
+              <rect x="10" y="70" width="110" height="35" fill="#e0f2fe" stroke="#0369a1" />
+              <text x="65" y="92" text-anchor="middle" font-size="11">Other sources</text>
+
+              <rect x="160" y="35" width="210" height="60" fill="#fef3c7" stroke="#a16207" />
+              <text x="265" y="60" text-anchor="middle" font-size="11">Managed Apache Flink application</text>
+              <text x="265" y="78" text-anchor="middle" font-size="10">windows, joins, aggregations</text>
+
+              <rect x="400" y="20" width="130" height="35" fill="#dcfce7" stroke="#15803d" />
+              <text x="465" y="42" text-anchor="middle" font-size="11">S3 / Redshift</text>
+
+              <rect x="400" y="75" width="130" height="35" fill="#fee2e2" stroke="#b91c1c" />
+              <text x="465" y="97" text-anchor="middle" font-size="11">ML endpoints / metrics</text>
+
+              <line x1="120" y1="37" x2="160" y2="55" stroke="#4b5563" marker-end="url(#arrow3)" />
+              <line x1="120" y1="87" x2="160" y2="75" stroke="#4b5563" marker-end="url(#arrow3)" />
+              <line x1="370" y1="55" x2="400" y2="37" stroke="#4b5563" marker-end="url(#arrow3)" />
+              <line x1="370" y1="75" x2="400" y2="92" stroke="#4b5563" marker-end="url(#arrow3)" />
+
+              <defs>
+                <marker id="arrow3" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 z" fill="#4b5563" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <p>Managed Flink applications are typically created via the console, CloudFormation, or the Flink APIs. The following shows a simple boto3 pattern to describe an application.</p>
+          <pre><code class="language-python">import boto3
+
+client = boto3.client("kinesisanalyticsv2")
+
+response = client.describe_application(
+    ApplicationName="ml-stream-features"
+)
+print(response["ApplicationDetail"]["ApplicationStatus"])</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Use event time and watermarks to handle late-arriving events correctly when computing features.</li>
+            <li>Checkpoint state frequently enough to meet recovery point objectives but not so often that it hurts throughput.</li>
+            <li>Keep business logic deterministic to benefit from exactly-once processing guarantees.</li>
+            <li>Externalize model invocation to robust, autoscaled endpoints rather than embedding model binaries inside Flink.</li>
+            <li>Use metrics and logs (via CloudWatch) to track lag, throughput, and backpressure.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>When you see “real-time feature engineering” with complex windows and joins, think Managed Service for Apache Flink.</li>
+            <li>Kinesis Data Streams alone does not perform transformations; Flink applications do.</li>
+            <li>Highlight that Flink is for stateful stream processing, not just delivery (that is Firehose).</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/what-is.html">Managed Service for Apache Flink – What Is</a></li>
+            <li><a href="https://aws.amazon.com/kinesis/data-analytics/">Service product page</a></li>
+            <li><a href="https://aws.amazon.com/blogs/big-data/category/analytics/amazon-kinesis-data-analytics/">AWS Big Data Blog – Flink use cases</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/what-is.html">Managed Service for Apache Flink documentation</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Managed Service for Apache Flink is the recommended way to build stateful, low-latency feature pipelines over Kinesis or Kafka streams on AWS.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

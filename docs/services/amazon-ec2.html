@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon EC2 – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Compute &amp; Orchestration</h2>
+          <ul>
+            <li><a href="amazon-ec2.html">Amazon EC2</a></li>
+            <li><a href="aws-batch.html">AWS Batch</a></li>
+            <li><a href="amazon-ecr.html">Amazon ECR</a></li>
+            <li><a href="amazon-ecs.html">Amazon ECS</a></li>
+            <li><a href="amazon-eks.html">Amazon EKS</a></li>
+            <li><a href="aws-fargate.html">AWS Fargate</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#compute">Compute &amp; Orchestration</a> <span aria-hidden="true">›</span>
+          Amazon EC2
+        </p>
+        <h1>Amazon Elastic Compute Cloud (EC2)</h1>
+        <p>
+          Amazon EC2 provides resizable virtual machines in the cloud. For ML, EC2 offers CPU and GPU instances that you
+          can configure with any frameworks or runtimes, giving maximum flexibility at the cost of more operational
+          responsibility than fully managed ML services.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Wide range of instance types, including GPU families for training and inference.</li>
+            <li>On-Demand, Reserved, and Spot pricing models.</li>
+            <li>Auto Scaling groups, placement groups, and elastic block storage (EBS).</li>
+            <li>Deep integration with VPC, IAM, and other core AWS services.</li>
+            <li>Ability to install any ML framework, library, or runtime you need.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Custom training or inference setups that do not fit nicely into SageMaker or Bedrock.</li>
+            <li>Legacy or specialized ML workloads that require custom OS or drivers.</li>
+            <li>Running open-source tools and orchestrators (for example, Kubeflow, Airflow) self-managed.</li>
+            <li>Prototyping and experimentation with full root access to the environment.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>How it works (high level)</h2>
+          <div class="diagram" role="img" aria-label="EC2 instances in a VPC run ML workloads using data stored in S3 or other services.">
+            <svg viewBox="0 0 540 130" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="20" width="120" height="40" fill="#ecfdf5" stroke="#047857" />
+              <text x="70" y="45" text-anchor="middle" font-size="11">S3 / data stores</text>
+
+              <rect x="10" y="70" width="120" height="40" fill="#e0f2fe" stroke="#0369a1" />
+              <text x="70" y="95" text-anchor="middle" font-size="11">EBS volumes</text>
+
+              <rect x="160" y="35" width="180" height="60" fill="#fee2e2" stroke="#b91c1c" />
+              <text x="250" y="60" text-anchor="middle" font-size="11">EC2 instances (CPU/GPU)</text>
+
+              <rect x="370" y="45" width="150" height="40" fill="#fef9c3" stroke="#a16207" />
+              <text x="445" y="70" text-anchor="middle" font-size="11">ML apps / endpoints</text>
+
+              <line x1="130" y1="40" x2="160" y2="50" stroke="#4b5563" marker-end="url(#arrow21)" />
+              <line x1="130" y1="90" x2="160" y2="80" stroke="#4b5563" marker-end="url(#arrow21)" />
+              <line x1="340" y1="65" x2="370" y2="65" stroke="#4b5563" marker-end="url(#arrow21)" />
+
+              <defs>
+                <marker id="arrow21" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 z" fill="#4b5563" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <h3>Launch an instance (CLI)</h3>
+          <pre><code class="language-bash">aws ec2 run-instances \
+  --image-id ami-0123456789abcdef0 \
+  --instance-type g5.xlarge \
+  --count 1 \
+  --iam-instance-profile Name=MLInstanceProfile \
+  --security-group-ids sg-1234567890abcdef0 \
+  --subnet-id subnet-1234567890abcdef0</code></pre>
+
+          <h3>Describe instances (Python, boto3)</h3>
+          <pre><code class="language-python">import boto3
+
+ec2 = boto3.client("ec2")
+resp = ec2.describe_instances(
+    Filters=[{"Name": "instance-state-name", "Values": ["running"]}]
+)
+for r in resp["Reservations"]:
+    for inst in r["Instances"]:
+        print(inst["InstanceId"], inst["InstanceType"])</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Use appropriate GPU instances (P, G, or newer families) for deep learning workloads.</li>
+            <li>Automate provisioning via infrastructure-as-code (CloudFormation, CDK, Terraform) to avoid manual drift.</li>
+            <li>Use Auto Scaling and Spot Instances for cost-effective batch training jobs.</li>
+            <li>Place ML instances in private subnets with controlled access via load balancers and security groups.</li>
+            <li>Prefer SageMaker for managed training and hosting unless you have strong reasons to manage EC2 directly.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>EC2 is chosen when you need full control or unsupported frameworks, not when you want managed ML.</li>
+            <li>Cost optimization questions often mention Spot Instances and right-sizing instance types.</li>
+            <li>Network and security details (VPC, security groups, IAM roles) frequently appear in EC2-based ML scenarios.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html">Amazon EC2 User Guide – Concepts</a></li>
+            <li><a href="https://aws.amazon.com/ec2/">Amazon EC2 product page</a></li>
+            <li><a href="https://aws.amazon.com/blogs/machine-learning/category/compute/amazon-ec2/">AWS ML Blog – EC2 for ML</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html">Amazon EC2 User Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Amazon EC2 underpins many custom ML deployments when you need maximum control over infrastructure and software.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

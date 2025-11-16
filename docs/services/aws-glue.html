@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AWS Glue – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Storage &amp; Lake</h2>
+          <ul>
+            <li><a href="amazon-s3.html">Amazon S3</a></li>
+            <li><a href="aws-glue.html">AWS Glue</a></li>
+            <li><a href="aws-lake-formation.html">AWS Lake Formation</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#storage-etl">Storage &amp; ETL</a> <span aria-hidden="true">›</span>
+          AWS Glue
+        </p>
+        <h1>AWS Glue</h1>
+        <p>
+          AWS Glue is a serverless data integration service that simplifies discovering, preparing, and moving data for
+          analytics and ML. It combines a managed metadata catalog with serverless ETL jobs (Spark, Python shell) and
+          visual data preparation tools.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Glue Data Catalog as a central schema and table registry for lakes.</li>
+            <li>Serverless ETL jobs running Apache Spark or Python.</li>
+            <li>Crawlers that infer schema and create/update table definitions automatically.</li>
+            <li>Glue Studio and DataBrew for visual job authoring and transformation.</li>
+            <li>Integration with Athena, Redshift Spectrum, EMR, and Lake Formation.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Building curated feature datasets from raw S3 data using scheduled ETL jobs.</li>
+            <li>Maintaining a unified data catalog consumed by Athena and Redshift for exploration.</li>
+            <li>Preprocessing data before loading into SageMaker Feature Store or training jobs.</li>
+            <li>Transforming streaming outputs (from Kinesis or Flink) into partitioned lake tables.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>How it works (high level)</h2>
+          <div class="diagram" role="img" aria-label="Crawlers discover data in S3 and register in the Data Catalog; Glue jobs transform data into curated tables for analytics and ML.">
+            <svg viewBox="0 0 540 130" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="40" width="110" height="50" fill="#dbeafe" stroke="#1d4ed8" />
+              <text x="65" y="70" text-anchor="middle" font-size="11">S3 data lake</text>
+
+              <rect x="150" y="20" width="130" height="40" fill="#fef3c7" stroke="#a16207" />
+              <text x="215" y="45" text-anchor="middle" font-size="11">Glue crawler</text>
+
+              <rect x="150" y="70" width="130" height="40" fill="#fee2e2" stroke="#b91c1c" />
+              <text x="215" y="95" text-anchor="middle" font-size="11">Glue ETL job</text>
+
+              <rect x="310" y="20" width="100" height="40" fill="#ecfdf5" stroke="#047857" />
+              <text x="360" y="45" text-anchor="middle" font-size="11">Data Catalog</text>
+
+              <rect x="430" y="20" width="100" height="40" fill="#e0f2fe" stroke="#0369a1" />
+              <text x="480" y="45" text-anchor="middle" font-size="11">Athena / ML</text>
+
+              <line x1="120" y1="60" x2="150" y2="40" stroke="#4b5563" marker-end="url(#arrow5)" />
+              <line x1="150" y1="90" x2="120" y2="90" stroke="#4b5563" marker-end="url(#arrow5)" />
+              <line x1="280" y1="40" x2="310" y2="40" stroke="#4b5563" marker-end="url(#arrow5)" />
+              <line x1="280" y1="90" x2="310" y2="90" stroke="#4b5563" marker-end="url(#arrow5)" />
+              <line x1="410" y1="40" x2="430" y2="40" stroke="#4b5563" marker-end="url(#arrow5)" />
+
+              <defs>
+                <marker id="arrow5" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 z" fill="#4b5563" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <h3>Start a Glue job (CLI)</h3>
+          <pre><code class="language-bash">aws glue start-job-run \
+  --job-name ml-curation-job</code></pre>
+
+          <h3>List tables in the Data Catalog (Python, boto3)</h3>
+          <pre><code class="language-python">import boto3
+
+glue = boto3.client("glue")
+
+resp = glue.get_tables(DatabaseName="ml_lake")
+for table in resp["TableList"]:
+    print(table["Name"])</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Standardize on the Glue Data Catalog as the single source of truth for lake schemas.</li>
+            <li>Partition tables by date and other high-cardinality keys to improve query performance.</li>
+            <li>Use job bookmarks to process only new or changed data.</li>
+            <li>Separate raw, staged, and curated zones using distinct prefixes or buckets.</li>
+            <li>Integrate with Lake Formation for fine-grained table access permissions.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>Glue appears whenever the exam describes “serverless ETL,” “data catalog,” or “schema discovery”.</li>
+            <li>Remember that Athena and Redshift Spectrum rely on the Glue Data Catalog for table metadata.</li>
+            <li>Lake Formation builds on the Glue catalog for governance; know their relationship.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html">AWS Glue Developer Guide – What Is AWS Glue?</a></li>
+            <li><a href="https://aws.amazon.com/glue/">AWS Glue product page</a></li>
+            <li><a href="https://aws.amazon.com/blogs/big-data/category/analytics/aws-glue/">AWS Big Data Blog – Glue</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html">AWS Glue Developer Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      AWS Glue is the default serverless ETL and catalog service for ML-oriented data lakes on AWS.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

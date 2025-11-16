@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon Translate – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Prebuilt AI APIs</h2>
+          <ul>
+            <li><a href="amazon-comprehend.html">Amazon Comprehend</a></li>
+            <li><a href="amazon-rekognition.html">Amazon Rekognition</a></li>
+            <li><a href="amazon-transcribe.html">Amazon Transcribe</a></li>
+            <li><a href="amazon-polly.html">Amazon Polly</a></li>
+            <li><a href="amazon-translate.html">Amazon Translate</a></li>
+            <li><a href="amazon-textract.html">Amazon Textract</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#prebuilt-apis">Prebuilt AI APIs</a> <span aria-hidden="true">›</span>
+          Amazon Translate
+        </p>
+        <h1>Amazon Translate</h1>
+        <p>
+          Amazon Translate is a neural machine translation service that delivers fast, high-quality language translation.
+          It supports many language pairs and allows customization via terminology and parallel data.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Real-time and batch translation APIs.</li>
+            <li>Custom terminology to preserve domain-specific terms and brand names.</li>
+            <li>Active Custom Translation using parallel data for domain adaptation.</li>
+            <li>Integration with S3, CloudWatch, and other AWS services.</li>
+            <li>Support for a wide range of languages and scripts.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Localizing user interfaces, content, and documentation.</li>
+            <li>Translating text data before downstream NLP (for example, sentiment analysis) when language support is limited.</li>
+            <li>Supporting multilingual chatbots and Q&amp;A systems.</li>
+            <li>Expanding labeled datasets across languages by translating text.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>How it works (high level)</h2>
+          <div class="diagram" role="img" aria-label="Applications send source text to Translate, which returns translated text.">
+            <svg viewBox="0 0 540 130" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="45" width="120" height="40" fill="#dbeafe" stroke="#1d4ed8" />
+              <text x="70" y="70" text-anchor="middle" font-size="11">Source text</text>
+
+              <rect x="160" y="30" width="160" height="70" fill="#fee2e2" stroke="#b91c1c" />
+              <text x="240" y="60" text-anchor="middle" font-size="11">Amazon Translate</text>
+
+              <rect x="350" y="45" width="170" height="40" fill="#ecfdf5" stroke="#047857" />
+              <text x="435" y="70" text-anchor="middle" font-size="11">Translated text</text>
+
+              <line x1="130" y1="65" x2="160" y2="65" stroke="#4b5563" marker-end="url(#arrow19)" />
+              <line x1="320" y1="65" x2="350" y2="65" stroke="#4b5563" marker-end="url(#arrow19)" />
+
+              <defs>
+                <marker id="arrow19" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 z" fill="#4b5563" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <h3>Translate text (CLI)</h3>
+          <pre><code class="language-bash">aws translate translate-text \
+  --text \"Hello, world\" \
+  --source-language-code en \
+  --target-language-code es</code></pre>
+
+          <h3>Translate text (Python, boto3)</h3>
+          <pre><code class="language-python">import boto3
+
+translate = boto3.client("translate")
+
+resp = translate.translate_text(
+    Text="Machine learning is powerful.",
+    SourceLanguageCode="en",
+    TargetLanguageCode="fr",
+)
+print(resp["TranslatedText"])</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Use custom terminology to preserve product names and technical jargon.</li>
+            <li>For high-volume translation, use batch APIs with S3 integration.</li>
+            <li>When combining with Comprehend, keep track of original language and translation quality assumptions.</li>
+            <li>Be aware of cultural context when interpreting translated text in ML models.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>Translate is the dedicated service for language translation, not for general text generation.</li>
+            <li>Look for phrases about “localizing content” or “supporting multiple languages.”</li>
+            <li>Custom terminology is often highlighted in questions about preserving brand or product names.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/translate/latest/dg/what-is.html">Amazon Translate Developer Guide – What Is</a></li>
+            <li><a href="https://aws.amazon.com/translate/">Amazon Translate product page</a></li>
+            <li><a href="https://aws.amazon.com/blogs/machine-learning/category/artificial-intelligence/amazon-translate/">AWS ML Blog – Translate</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/translate/latest/dg/what-is.html">Amazon Translate Developer Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Amazon Translate offers managed neural translation for multilingual ML and application scenarios.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

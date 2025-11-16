@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon FSx – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Block &amp; File Storage</h2>
+          <ul>
+            <li><a href="amazon-ebs.html">Amazon EBS</a></li>
+            <li><a href="amazon-efs.html">Amazon EFS</a></li>
+            <li><a href="amazon-fsx.html">Amazon FSx</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#storage">Block &amp; File Storage</a> <span aria-hidden="true">›</span>
+          Amazon FSx
+        </p>
+        <h1>Amazon FSx</h1>
+        <p>
+          Amazon FSx provides managed file systems built on popular file storage technologies such as Windows File
+          Server, Lustre, NetApp ONTAP, and OpenZFS. In ML workloads, FSx for Lustre is particularly relevant for
+          high-performance, POSIX-compliant storage.
+        </p>
+
+        <section>
+          <h2>Key features (FSx for Lustre)</h2>
+          <ul>
+            <li>High-throughput, low-latency file system optimized for compute-intensive workloads.</li>
+            <li>Integration with S3 for linking file systems to S3 buckets.</li>
+            <li>Multiple deployment options (scratch and persistent).</li>
+            <li>POSIX-compliant semantics for Linux-based compute clusters.</li>
+            <li>Scales to many GB/s of throughput and millions of IOPS.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Large-scale training jobs on EC2 or EKS that need shared, high-performance storage.</li>
+            <li>HPC-style ML workloads that benefit from Lustre’s parallel I/O.</li>
+            <li>Speeding up access to training datasets stored in S3 via linked FSx for Lustre file systems.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>CLI examples</h2>
+          <h3>Create an FSx for Lustre file system (CLI)</h3>
+          <pre><code class="language-bash">aws fsx create-file-system \
+  --file-system-type LUSTRE \
+  --storage-capacity 1200 \
+  --subnet-ids subnet-1234567890abcdef0</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Use FSx for Lustre for high-performance, shared file access across many training nodes.</li>
+            <li>Link FSx for Lustre to S3 buckets for bursty training workloads that read large datasets.</li>
+            <li>Select scratch vs. persistent deployment types based on durability and lifespan needs.</li>
+            <li>Ensure your EC2 instances are in the same AZ and VPC as the FSx file system for best performance.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>FSx for Lustre is highlighted when high-throughput, shared POSIX file storage for training is required.</li>
+            <li>EFS focuses on general-purpose POSIX sharing; FSx for Lustre focuses on high-performance workloads.</li>
+            <li>Look for mentions of “HPC training cluster” or “many-node deep learning job.”</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html">Amazon FSx documentation – What Is Amazon FSx?</a></li>
+            <li><a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/what-is.html">FSx for Lustre User Guide – What Is</a></li>
+            <li><a href="https://aws.amazon.com/fsx/lustre/">Amazon FSx for Lustre product page</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/what-is.html">Amazon FSx for Lustre User Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Amazon FSx for Lustre is the go-to file system for high-performance shared storage in large ML training clusters.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

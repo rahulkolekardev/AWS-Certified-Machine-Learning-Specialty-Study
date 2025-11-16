@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon EKS – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Compute &amp; Containers</h2>
+          <ul>
+            <li><a href="amazon-ec2.html">Amazon EC2</a></li>
+            <li><a href="aws-batch.html">AWS Batch</a></li>
+            <li><a href="amazon-ecr.html">Amazon ECR</a></li>
+            <li><a href="amazon-ecs.html">Amazon ECS</a></li>
+            <li><a href="amazon-eks.html">Amazon EKS</a></li>
+            <li><a href="aws-fargate.html">AWS Fargate</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#compute">Compute &amp; Orchestration</a> <span aria-hidden="true">›</span>
+          Amazon EKS
+        </p>
+        <h1>Amazon Elastic Kubernetes Service (EKS)</h1>
+        <p>
+          Amazon EKS is a managed Kubernetes service that makes it easy to run Kubernetes clusters on AWS without
+          managing the control plane. Many teams use EKS to standardize ML infrastructure around Kubernetes-native
+          tools and patterns.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Managed Kubernetes control plane with automatic scaling and patching.</li>
+            <li>Worker nodes on EC2 or Fargate.</li>
+            <li>Integration with IAM, VPC, and CloudWatch for security and observability.</li>
+            <li>Support for GPU nodes for ML training and inference.</li>
+            <li>Compatibility with the broader Kubernetes ecosystem (Helm, operators, etc.).</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Running Kubernetes-native ML platforms such as Kubeflow or Ray on K8s.</li>
+            <li>Hosting microservices and inference workloads that rely on Kubernetes patterns.</li>
+            <li>Portability across environments (on-premises and AWS) using the same control plane tooling.</li>
+            <li>Shared ML infrastructure for large organizations standardizing on Kubernetes.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <h3>Describe a cluster (CLI)</h3>
+          <pre><code class="language-bash">aws eks describe-cluster --name ml-eks-cluster</code></pre>
+
+          <h3>List clusters (Python, boto3)</h3>
+          <pre><code class="language-python">import boto3
+
+eks = boto3.client("eks")
+resp = eks.list_clusters()
+print(resp.get("clusters", []))</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Use managed node groups and autoscaling for balancing cost and performance.</li>
+            <li>Isolate workloads in namespaces and use network policies for security.</li>
+            <li>Consider EKS + Fargate for simpler operations of small services; use EC2 nodes for GPU-heavy jobs.</li>
+            <li>Integrate with ECR, IAM roles for service accounts, and VPC CNI for robust networking.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>EKS is chosen when Kubernetes portability and ecosystem integration are emphasized.</li>
+            <li>For simpler container needs without Kubernetes, ECS is usually preferred in exam answers.</li>
+            <li>Managed control plane and Kubernetes-native tooling are key differentiators.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html">Amazon EKS User Guide – What Is Amazon EKS?</a></li>
+            <li><a href="https://aws.amazon.com/eks/">Amazon EKS product page</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html">Amazon EKS User Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Amazon EKS powers Kubernetes-based ML platforms and workloads on AWS with a managed control plane.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

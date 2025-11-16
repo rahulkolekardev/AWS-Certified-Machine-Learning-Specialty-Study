@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon SageMaker – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Modeling Platforms</h2>
+          <ul>
+            <li><a href="amazon-sagemaker.html">Amazon SageMaker</a></li>
+            <li><a href="amazon-bedrock.html">Amazon Bedrock</a></li>
+            <li><a href="amazon-q.html">Amazon Q</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#modeling-platforms">Modeling Platforms</a> <span aria-hidden="true">›</span>
+          Amazon SageMaker
+        </p>
+        <h1>Amazon SageMaker</h1>
+        <p>
+          Amazon SageMaker is a fully managed machine learning service that provides tools to build, train, and deploy
+          ML models at scale. It offers managed infrastructure, integrated development environments, MLOps workflows,
+          and specialized features such as a feature store and model monitoring.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>SageMaker Studio and notebooks for collaborative ML development.</li>
+            <li>Managed training jobs with automatic model tuning and spot instance support.</li>
+            <li>Real-time, batch, and serverless inference endpoints.</li>
+            <li>SageMaker Pipelines for CI/CD and MLOps automation.</li>
+            <li>Feature Store, Data Wrangler, Clarify (bias/explainability), and Model Monitor.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>End-to-end ML lifecycle: data preparation, training, evaluation, and deployment.</li>
+            <li>Hosting production endpoints for real-time or batch inference.</li>
+            <li>Managing feature definitions and reuse through SageMaker Feature Store.</li>
+            <li>Implementing reproducible pipelines and approvals via SageMaker Pipelines.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>How it works (high level)</h2>
+          <div class="diagram" role="img" aria-label="SageMaker orchestrates data from S3 and other sources through training and endpoints for inference.">
+            <svg viewBox="0 0 540 130" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="20" width="120" height="40" fill="#ecfdf5" stroke="#047857" />
+              <text x="70" y="45" text-anchor="middle" font-size="11">S3 / data sources</text>
+
+              <rect x="10" y="70" width="120" height="40" fill="#e0f2fe" stroke="#0369a1" />
+              <text x="70" y="95" text-anchor="middle" font-size="11">Feature Store</text>
+
+              <rect x="160" y="35" width="160" height="60" fill="#fee2e2" stroke="#b91c1c" />
+              <text x="240" y="60" text-anchor="middle" font-size="11">SageMaker training / pipelines</text>
+
+              <rect x="350" y="20" width="170" height="35" fill="#fef9c3" stroke="#a16207" />
+              <text x="435" y="42" text-anchor="middle" font-size="11">Real-time / batch endpoints</text>
+
+              <rect x="350" y="75" width="170" height="35" fill="#dcfce7" stroke="#15803d" />
+              <text x="435" y="97" text-anchor="middle" font-size="11">Applications &amp; monitoring</text>
+
+              <line x1="130" y1="40" x2="160" y2="50" stroke="#4b5563" marker-end="url(#arrow12)" />
+              <line x1="130" y1="90" x2="160" y2="80" stroke="#4b5563" marker-end="url(#arrow12)" />
+              <line x1="320" y1="55" x2="350" y2="35" stroke="#4b5563" marker-end="url(#arrow12)" />
+              <line x1="320" y1="75" x2="350" y2="92" stroke="#4b5563" marker-end="url(#arrow12)" />
+
+              <defs>
+                <marker id="arrow12" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 z" fill="#4b5563" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <h3>Launch a training job (CLI)</h3>
+          <pre><code class="language-bash">aws sagemaker create-training-job \
+  --training-job-name ml-demo-job \
+  --algorithm-specification TrainingImage=&lt;ecr-image&gt;,TrainingInputMode=File \
+  --role-arn arn:aws:iam::123456789012:role/SageMakerRole \
+  --input-data-config file://input-config.json \
+  --output-data-config S3OutputPath=s3://ml-artifacts/train/ \
+  --resource-config InstanceType=ml.m5.xlarge,InstanceCount=1,VolumeSizeInGB=50</code></pre>
+
+          <h3>Invoke an endpoint (Python, boto3)</h3>
+          <pre><code class="language-python">import boto3, json
+
+sm_runtime = boto3.client("sagemaker-runtime")
+
+resp = sm_runtime.invoke_endpoint(
+    EndpointName="ml-endpoint",
+    ContentType="application/json",
+    Body=json.dumps({"features": [0.1, 0.2, 0.3]}),
+)
+print(json.loads(resp["Body"].read()))</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Use managed training with Spot Instances for cost-efficient large jobs.</li>
+            <li>Separate staging and production endpoints and roll out changes via blue/green or canary deployments.</li>
+            <li>Use Pipelines for reproducible, auditable ML workflows and approvals.</li>
+            <li>Store features in Feature Store for consistency between offline training and online inference.</li>
+            <li>Monitor models with Model Monitor for drift and data quality issues.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>SageMaker is the default answer for managed training and deployment when you want to avoid undifferentiated heavy lifting.</li>
+            <li>EC2/Batch are selected when you need bespoke control or nonstandard frameworks and are willing to manage infra.</li>
+            <li>Know key components: Studio, training jobs, endpoints, Pipelines, Feature Store, and Model Monitor.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html">Amazon SageMaker Developer Guide – What Is Amazon SageMaker?</a></li>
+            <li><a href="https://aws.amazon.com/sagemaker/">Amazon SageMaker product page</a></li>
+            <li><a href="https://aws.amazon.com/blogs/machine-learning/">AWS Machine Learning Blog – SageMaker category</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html">Amazon SageMaker Developer Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      For the exam, think of SageMaker as the primary managed ML platform for training and hosting models on AWS.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

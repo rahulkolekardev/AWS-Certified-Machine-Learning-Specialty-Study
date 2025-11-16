@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon Kinesis Data Streams – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Data Ingestion</h2>
+          <ul>
+            <li><a href="amazon-kinesis-data-streams.html">Kinesis Data Streams</a></li>
+            <li><a href="amazon-kinesis-data-firehose.html">Kinesis Data Firehose</a></li>
+            <li><a href="amazon-managed-service-for-apache-flink.html">Managed Service for Apache Flink</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#data-ingestion">Data Ingestion</a> <span aria-hidden="true">›</span>
+          Amazon Kinesis Data Streams
+        </p>
+        <h1>Amazon Kinesis Data Streams</h1>
+        <p>
+          Amazon Kinesis Data Streams (KDS) is a massively scalable, durable streaming data service for building custom
+          real-time data processing applications. It lets you capture gigabytes per second of data from clickstreams,
+          IoT devices, logs, and more, and process them with low latency using your own consumers or managed services.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Shard-based scalability with ordered records per shard.</li>
+            <li>Configurable retention (hours to days) and replay capability.</li>
+            <li>Enhanced fan-out for low-latency, high-throughput consumers.</li>
+            <li>Integration with Lambda, Managed Service for Apache Flink, and Firehose.</li>
+            <li>Ordering guarantees and checkpointing via the Kinesis Client Library (KCL).</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Ingesting user interaction and telemetry streams into an S3-based data lake for training datasets.</li>
+            <li>Feeding real-time feature pipelines, for example clickstream features for personalization models.</li>
+            <li>Providing streaming inputs to Managed Service for Apache Flink for feature engineering.</li>
+            <li>Capturing inference requests and responses for online monitoring and model retraining.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>How it works (high level)</h2>
+          <div class="diagram" role="img" aria-label="Producers write records into a Kinesis stream made of shards; consumers read from shards to storage and ML services.">
+            <svg viewBox="0 0 520 130" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="40" width="100" height="50" fill="#dbeafe" stroke="#1d4ed8" />
+              <text x="60" y="70" text-anchor="middle" font-size="11">Producers</text>
+
+              <rect x="150" y="30" width="170" height="70" fill="#eff6ff" stroke="#1d4ed8" />
+              <text x="235" y="50" text-anchor="middle" font-size="11">Kinesis Data Stream</text>
+              <rect x="160" y="60" width="50" height="30" fill="#bfdbfe" stroke="#1d4ed8" />
+              <rect x="215" y="60" width="50" height="30" fill="#bfdbfe" stroke="#1d4ed8" />
+              <rect x="270" y="60" width="50" height="30" fill="#bfdbfe" stroke="#1d4ed8" />
+
+              <rect x="360" y="20" width="140" height="35" fill="#dcfce7" stroke="#15803d" />
+              <text x="430" y="42" text-anchor="middle" font-size="11">Consumers (Lambda, Flink)</text>
+
+              <rect x="360" y="75" width="140" height="35" fill="#fef9c3" stroke="#a16207" />
+              <text x="430" y="97" text-anchor="middle" font-size="11">S3 / Analytics / ML</text>
+
+              <line x1="110" y1="65" x2="150" y2="65" stroke="#4b5563" marker-end="url(#arrow)" />
+              <line x1="320" y1="55" x2="360" y2="37" stroke="#4b5563" marker-end="url(#arrow)" />
+              <line x1="320" y1="75" x2="360" y2="92" stroke="#4b5563" marker-end="url(#arrow)" />
+
+              <defs>
+                <marker id="arrow" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 z" fill="#4b5563" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <h3>Create a stream (CLI)</h3>
+          <pre><code class="language-bash">aws kinesis create-stream \
+  --stream-name ml-clickstream \
+  --shard-count 2</code></pre>
+
+          <h3>Put and read records (Python, boto3)</h3>
+          <pre><code class="language-python">import boto3
+
+kinesis = boto3.client("kinesis")
+stream_name = "ml-clickstream"
+
+# Put a record
+kinesis.put_record(
+    StreamName=stream_name,
+    PartitionKey="user-123",
+    Data=b'{"event":"page_view","user_id":123}'
+)
+
+# Get a shard iterator and read
+desc = kinesis.describe_stream(StreamName=stream_name)
+shard_id = desc["StreamDescription"]["Shards"][0]["ShardId"]
+it = kinesis.get_shard_iterator(
+    StreamName=stream_name,
+    ShardId=shard_id,
+    ShardIteratorType="TRIM_HORIZON",
+)["ShardIterator"]
+
+records = kinesis.get_records(ShardIterator=it, Limit=10)</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Use partition keys that evenly distribute traffic across shards to avoid hot shards.</li>
+            <li>Right-size retention so you can reprocess data for feature backfills and debugging.</li>
+            <li>Use Enhanced Fan-Out for latency-sensitive ML features with multiple consumer applications.</li>
+            <li>Decouple ingestion (KDS) from delivery (Firehose) when you need both real-time and batched outputs.</li>
+            <li>Encrypt streams with KMS and control producer/consumer access via IAM policies.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>Kinesis Data Streams = custom consumers, low-latency, replay; Kinesis Data Firehose = managed delivery, no replay.</li>
+            <li>Look for requirements about multiple independent consumers or reprocessing past events.</li>
+            <li>Shard-based scaling and Enhanced Fan-Out are key performance levers.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/streams/latest/dev/introduction.html">Amazon Kinesis Data Streams Developer Guide – Introduction</a></li>
+            <li><a href="https://aws.amazon.com/kinesis/data-streams/">Amazon Kinesis Data Streams product page</a></li>
+            <li><a href="https://aws.amazon.com/blogs/big-data/category/analytics/amazon-kinesis/">AWS Big Data Blog – Kinesis posts</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/streams/latest/dev/introduction.html">Kinesis Data Streams Developer Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Amazon Kinesis Data Streams is the primary building block for low-latency streaming ingestion in AWS ML architectures.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+

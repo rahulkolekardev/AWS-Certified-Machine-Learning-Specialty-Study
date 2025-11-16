@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AWS Lake Formation – AWS ML Specialty Ebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/print.css" media="print" />
+  </head>
+  <body class="layout">
+    <header class="top-nav" role="banner">
+      <div class="top-nav-title">AWS Certified Machine Learning – Specialty Ebook</div>
+      <nav aria-label="Main navigation">
+        <div class="top-nav-links">
+          <a href="../index.html" data-page="index.html">Home</a>
+          <a href="../toc.html" data-page="toc.html">Table of Contents</a>
+          <a href="../practice-questions.html" data-page="practice-questions.html">Practice Questions</a>
+          <a href="../glossary.html" data-page="glossary.html">Glossary</a>
+          <a href="../cheat-sheet.html" data-page="cheat-sheet.html">Cheat Sheet</a>
+          <a href="../search.html" data-page="search.html">Search</a>
+          <a href="../about.html" data-page="about.html">About</a>
+        </div>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Service navigation">
+        <section class="sidebar-section">
+          <h2>Storage &amp; Governance</h2>
+          <ul>
+            <li><a href="amazon-s3.html">Amazon S3</a></li>
+            <li><a href="aws-glue.html">AWS Glue</a></li>
+            <li><a href="aws-lake-formation.html">AWS Lake Formation</a></li>
+          </ul>
+        </section>
+      </aside>
+      <main class="main-content" role="main">
+        <p class="breadcrumbs">
+          <a href="../index.html">Home</a> <span aria-hidden="true">›</span>
+          <a href="../toc.html#storage-etl">Storage &amp; ETL</a> <span aria-hidden="true">›</span>
+          AWS Lake Formation
+        </p>
+        <h1>AWS Lake Formation</h1>
+        <p>
+          AWS Lake Formation helps you build, secure, and manage data lakes on AWS. It provides fine-grained access
+          control over data stored in S3 and registered in the Glue Data Catalog, integrating with analytics and ML
+          services that query the lake.
+        </p>
+
+        <section>
+          <h2>Key features</h2>
+          <ul>
+            <li>Central permissions model for databases, tables, and columns in the data lake.</li>
+            <li>Integration with AWS Glue Data Catalog, Athena, Redshift Spectrum, and EMR.</li>
+            <li>Support for row-level and column-level security policies.</li>
+            <li>Blueprints and workflows for ingesting data into governed tables.</li>
+            <li>Tag-based access control for simplifying permissions management.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where it fits in ML pipelines</h2>
+          <ul>
+            <li>Governed data lakes where multiple teams share curated datasets for ML and analytics.</li>
+            <li>Scenarios requiring sensitive attributes (for example, PII) to be restricted to certain roles.</li>
+            <li>Managing cross-account and cross-team access to feature tables stored in S3.</li>
+            <li>Auditable permission model for regulated industries building ML solutions.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>How it works (high level)</h2>
+          <div class="diagram" role="img" aria-label="Lake Formation sits between S3, the Data Catalog, and analytics/ML services, enforcing table permissions.">
+            <svg viewBox="0 0 540 130" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="45" width="110" height="40" fill="#ecfdf5" stroke="#047857" />
+              <text x="65" y="70" text-anchor="middle" font-size="11">S3 data lake</text>
+
+              <rect x="150" y="25" width="120" height="40" fill="#e0f2fe" stroke="#0369a1" />
+              <text x="210" y="50" text-anchor="middle" font-size="11">Glue Data Catalog</text>
+
+              <rect x="150" y="75" width="120" height="40" fill="#fee2e2" stroke="#b91c1c" />
+              <text x="210" y="100" text-anchor="middle" font-size="11">Lake Formation</text>
+
+              <rect x="300" y="20" width="220" height="30" fill="#fef9c3" stroke="#a16207" />
+              <text x="410" y="40" text-anchor="middle" font-size="11">Athena / Redshift / EMR / SageMaker</text>
+
+              <line x1="120" y1="65" x2="150" y2="45" stroke="#4b5563" marker-end="url(#arrow6)" />
+              <line x1="120" y1="65" x2="150" y2="95" stroke="#4b5563" marker-end="url(#arrow6)" />
+              <line x1="270" y1="45" x2="300" y2="35" stroke="#4b5563" marker-end="url(#arrow6)" />
+              <line x1="270" y1="95" x2="300" y2="35" stroke="#4b5563" marker-end="url(#arrow6)" />
+
+              <defs>
+                <marker id="arrow6" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 z" fill="#4b5563" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+        </section>
+
+        <section>
+          <h2>CLI and SDK examples</h2>
+          <h3>Grant table permissions (CLI)</h3>
+          <pre><code class="language-bash">aws lakeformation grant-permissions \
+  --principal DataLakePrincipalIdentifier=arn:aws:iam::123456789012:role/AnalystRole \
+  --resource '{\"Table\":{\"DatabaseName\":\"ml_lake\",\"Name\":\"features_customers\"}}' \
+  --permissions SELECT</code></pre>
+
+          <h3>List permissions (Python, boto3)</h3>
+          <pre><code class="language-python">import boto3
+
+lf = boto3.client("lakeformation")
+
+resp = lf.list_permissions(
+    ResourceType="TABLE",
+    MaxResults=20,
+)
+for entry in resp.get("PrincipalResourcePermissions", []):
+    print(entry["Principal"], entry["Resource"], entry["Permissions"])</code></pre>
+        </section>
+
+        <section>
+          <h2>Best practices for ML workloads</h2>
+          <ul>
+            <li>Use Lake Formation for centralized permissions instead of duplicating S3 bucket policies per service.</li>
+            <li>Leverage LF-tags and tag-based access control to simplify large-scale permission management.</li>
+            <li>Apply column-level permissions for sensitive attributes, allowing broader access to non-sensitive fields.</li>
+            <li>Integrate Lake Formation with Athena, Redshift, and EMR to enforce consistent governance.</li>
+            <li>Design your data model (databases, tables, columns) with permission boundaries in mind.</li>
+          </ul>
+        </section>
+
+        <section class="exam-tips callout">
+          <h2>Exam tips</h2>
+          <ul>
+            <li>Questions about fine-grained (table/column) access to S3-based lake data usually point to Lake Formation.</li>
+            <li>Remember that Lake Formation uses the Glue Data Catalog underneath.</li>
+            <li>Contrast with IAM-only controls; Lake Formation provides higher-level, data-centric permissions.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><a href="https://docs.aws.amazon.com/lake-formation/latest/dg/what-is-lake-formation.html">Lake Formation Developer Guide – What Is</a></li>
+            <li><a href="https://aws.amazon.com/lake-formation/">Lake Formation product page</a></li>
+            <li><a href="https://docs.aws.amazon.com/whitepapers/latest/building-data-lakes/building-data-lakes.html">Building Data Lakes on AWS whitepaper</a></li>
+          </ul>
+        </section>
+
+        <p class="source-line">
+          Source: <a href="https://docs.aws.amazon.com/lake-formation/latest/dg/what-is-lake-formation.html">AWS Lake Formation Developer Guide</a>.
+          Last reviewed: 2025-11-16 (offline, approximate).
+        </p>
+      </main>
+    </div>
+    <footer class="site-footer" role="contentinfo">
+      Lake Formation is the exam’s go-to answer for centralized, table-level governance over S3-based data lakes.
+    </footer>
+    <script src="../scripts/prism.js"></script>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
+
